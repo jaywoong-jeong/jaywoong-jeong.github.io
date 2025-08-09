@@ -1,8 +1,8 @@
 import React from 'react';
 import GlobalStyle from './GlobalStyle';
 import Header from './components/Header';
-import { AppContainer, Footer } from './components/layout/AppContainer';
-import { Column, ColumnContent } from './components/layout/Column';
+import { AppContainer } from './components/layout/AppContainer';
+import { Column, ColumnContent, ColumnFooter } from './components/layout/Column';
 import { ProfileSection } from './components/content/ProfileSection';
 import { CVSectionComponent } from './components/content/CVSection';
 import { ContentRenderer } from './components/content/ContentRenderer';
@@ -22,6 +22,9 @@ function App() {
           <ColumnContent>
             <ProfileSection data={profile} />
           </ColumnContent>
+          <ColumnFooter>
+            © 2024-{new Date().getFullYear()} Jaywoong Jeong <br></br> Last Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}
+          </ColumnFooter>
         </Column>
 
         <Column>
@@ -48,9 +51,6 @@ function App() {
             <CVSectionComponent />
           </ColumnContent>
         </Column>
-        <Footer>
-          © 2024-{new Date().getFullYear()} Jaywoong Jeong · Last Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}
-        </Footer>
       </AppContainer>
     </>
   );

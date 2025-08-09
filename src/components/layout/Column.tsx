@@ -18,3 +18,9 @@ export const ColumnContent = styled.div`
   padding: ${theme.spacing.md} ${theme.spacing.md} ${theme.spacing.xxxl} ${theme.spacing.md};
   ${scrollStyles}
 `;
+
+export const ColumnFooter = styled.div`
+  padding: ${theme.spacing.xs} ${theme.spacing.md};
+  font-size: ${theme.fonts.sizes.xs};
+  color: ${theme.colors.accent};
+`;
