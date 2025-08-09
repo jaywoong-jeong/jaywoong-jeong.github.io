@@ -40,8 +40,7 @@ const Details = styled.div`
 `;
 
 function ProjectItem({ imageUrl, imageAlt, projectNumber, details, moreLink }: ProjectItemProps) {
-  const base = import.meta.env.BASE_URL;
-  const resolveSrc = (p: string) => `${base}${p.replace(/^\//, '')}`;
+  const resolveSrc = (p: string) => p; // base is '/'
   return (
     <Card>
       <a href={moreLink}>
