@@ -20,49 +20,7 @@ const ProfileDescription = styled.div`
   margin-bottom: ${theme.spacing.lg};
 `;
 
-const ContactTitle = styled.div`
-  font-size: ${theme.fonts.sizes.sm};
-  font-weight: ${theme.fonts.weights.semibold};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: ${theme.colors.primary};
-  margin-bottom: ${theme.spacing.sm};
-`;
-
-const ContactLink = styled.a`
-  color: ${theme.colors.secondary};
-  text-decoration: underline;
-  font-size: ${theme.fonts.sizes.xs};
-  
-  &:hover {
-    color: ${theme.colors.primary};
-  }
-`;
-
-const ContactText = styled.span`
-  color: ${theme.colors.secondary};
-  font-size: ${theme.fonts.sizes.xs};
-`;
-
-// CV 섹션과 동일한 스타일의 섹션 구분
-const ProfileSectionDiv = styled.div`
-  margin-bottom: 3rem;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -1.5rem;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: ${theme.colors.border};
-  }
-  
-  &:last-child::after {
-    display: none;
-  }
-`;
+// Removed unused styled components to satisfy strict TS checks during CI
 
 const LinksTitle = styled.div`
   font-size: ${theme.fonts.sizes.sm};

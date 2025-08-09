@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 import { ProfileSection as StyledProfileSection } from '../layout/Section';
-import { SectionCard } from '../ui/Card';
+// SectionCard unused
 
 // CV 좌우 배치 스타일 컴포넌트들
 const CVSection = styled.div`
