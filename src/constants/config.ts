@@ -1,5 +1,5 @@
 export const APP_CONFIG = {
-  defaultMenu: 'design',
+  defaultMenu: 'publications',
   menus: ['projects', 'publications', 'design'] as const,
   contact: {
     address: '291 Daehak-ro, Yuseong-gu',
