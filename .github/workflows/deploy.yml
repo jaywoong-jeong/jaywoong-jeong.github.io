@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: BASE_PATH=/jaywoong.github.io/ npm run build
+        run: npm run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
