@@ -40,11 +40,13 @@ const Details = styled.div`
 `;
 
 function ProjectItem({ imageUrl, imageAlt, projectNumber, details, moreLink }: ProjectItemProps) {
+  const base = import.meta.env.BASE_URL;
+  const resolveSrc = (p: string) => `${base}${p.replace(/^\//, '')}`;
   return (
     <Card>
       <a href={moreLink}>
         <ProjectImageContainer>
-          <ProjectImage src={imageUrl} alt={imageAlt} />
+          <ProjectImage src={resolveSrc(imageUrl)} alt={imageAlt} />
         </ProjectImageContainer>
       </a>
       <InfoGrid>

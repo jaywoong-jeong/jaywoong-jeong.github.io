@@ -54,12 +54,14 @@ interface DesignItemProps {
 }
 
 export const DesignItem: React.FC<DesignItemProps> = ({ artwork }) => {
+  const base = import.meta.env.BASE_URL;
+  const resolveSrc = (p?: string) => (p ? `${base}${p.replace(/^\//, '')}` : undefined);
   return (
     <ItemCard>
       {artwork.image && (
         <DesignImageContainer>
           <DesignImage 
-            src={artwork.image} 
+            src={resolveSrc(artwork.image)} 
             alt={artwork.title}
             loading="lazy"
           />
