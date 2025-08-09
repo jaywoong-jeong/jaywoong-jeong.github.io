@@ -1,6 +1,6 @@
 export const APP_CONFIG = {
   defaultMenu: 'publications',
-  menus: ['projects', 'publications', 'design'] as const,
+  menus: ['projects', 'publications', 'design', 'digitalGarden'] as const,
   contact: {
     address: '291 Daehak-ro, Yuseong-gu',
     city: 'Daejeon, Republic of Korea',

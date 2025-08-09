@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ProfileSection as StyledProfileSection } from '../layout/Section';
 import { theme } from '../../styles/theme';
 import type { ProfileData } from '../../types';
+import type { MenuType } from '../../constants/config';
 
 const ProfileTitle = styled.div`
   font-size: calc(${theme.fonts.sizes.sm} * 1.5);
@@ -57,9 +58,10 @@ const LargeLink = styled.a`
 
 interface ProfileSectionProps {
   data: ProfileData | null;
+  onSelectMenu?: (menu: MenuType) => void;
 }
 
-export const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
+export const ProfileSection: React.FC<ProfileSectionProps> = ({ data, onSelectMenu }) => {
   if (!data) {
     return (
       <StyledProfileSection>
@@ -110,7 +112,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
         {/* 큰 링크들 */}
         <LargeLink href="https://blog.example.com" target="_blank">Blog</LargeLink><br />
         <LargeLink href="https://newsletter.example.com" target="_blank">Newsletter</LargeLink><br />
-        <LargeLink href="https://garden.example.com" target="_blank">Digital Garden</LargeLink><br />
+        <LargeLink href="#" onClick={(e) => { e.preventDefault(); onSelectMenu && onSelectMenu('digitalGarden'); }}>Digital Garden</LargeLink><br />
       </div>
     </StyledProfileSection>
   );
