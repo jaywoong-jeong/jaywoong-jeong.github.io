@@ -1,13 +1,12 @@
 export const APP_CONFIG = {
   defaultMenu: 'publications',
-  menus: ['projects', 'publications', 'design', 'digitalGarden'] as const,
+  menus: ['projects', 'publications', 'design'] as const,
   contact: {
     address: '291 Daehak-ro, Yuseong-gu',
     city: 'Daejeon, Republic of Korea',
     phone: '010-8998-7360',
     email: 'jaywoong.jeong@gmail.com',
     emailKaist: 'jaywoong.jeong@kaist.ac.kr',
-    website: 'hello@example.com',
     instagram: 'Instagram'
   },
   profile: {
