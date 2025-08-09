@@ -93,14 +93,6 @@ export const ContentRenderer: React.FC<ContentRendererProps> = ({
           ))}
         </ModernBody>
       );
-    case 'digitalGarden':
-      return (
-        <ModernBody>
-          <div style={{ fontSize: theme.fonts.sizes.sm, color: theme.colors.secondary }}>
-            Digital Garden is coming soon. This view stays in the current page without navigation.
-          </div>
-        </ModernBody>
-      );
     default:
       return null;
   }

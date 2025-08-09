@@ -10,14 +10,4 @@ export const AppContainer = styled.div`
   
   /* Safari/Firefox zoom 대안: 루트 스케일 적용 방지 */
   transform: none;
-  position: relative;
-  padding-bottom: 32px; /* footer 공간 확보 */
-`;
-
-export const Footer = styled.div`
-  position: absolute;
-  left: ${theme.spacing.md};
-  bottom: ${theme.spacing.xs};
-  font-size: ${theme.fonts.sizes.xs};
-  color: ${theme.colors.accent};
 `;

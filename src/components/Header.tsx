@@ -98,7 +98,6 @@ function Header({ title, showMenu, onMenuSelect }: HeaderProps) {
               <MenuItem onClick={() => handleMenuItemClick('projects')}>Projects</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick('publications')}>Publications</MenuItem>
               <MenuItem onClick={() => handleMenuItemClick('design')}>Design</MenuItem>
-              <MenuItem onClick={() => handleMenuItemClick('digitalGarden')}>Digital Garden</MenuItem>
             </DropdownMenu>
           )}
         </MenuButton>

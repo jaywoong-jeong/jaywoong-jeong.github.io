@@ -20,7 +20,7 @@ function App() {
         <Column>
           <Header title="Profile" />
           <ColumnContent>
-            <ProfileSection data={profile} onSelectMenu={setActiveMenu} />
+            <ProfileSection data={profile} />
           </ColumnContent>
           <ColumnFooter>
             © 2024-{new Date().getFullYear()} Jaywoong Jeong <br></br> Last Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}
