@@ -122,7 +122,7 @@ export const PROJECTS: Project[] = [
     types: ['strategy', 'research'],
     year: '2023',
     selected: true,
-    image: '/projects/2023_course_biz558_sm_global_marketing_strategy/cover.JPG',
+    image: '/projects/2023_course_biz558_sm_global_marketing_strategy/cover.jpg',
     imageAlt: 'KAIST MBA project cover',
     links: [
       { label: 'Slides', url: '/projects/kaist-mba-sm/slides.pdf', kind: 'pdf' },
