@@ -201,7 +201,7 @@ export default function Personal() {
             My goal is to expand creative possibilities by making AI-powered creation tools available to everyone.
             <br />
             <br />
-            I've also worked in{' '}
+            I&apos;ve also worked in{' '}
             <a
               href={LINKS.companyK}
               target="_blank"
@@ -211,7 +211,7 @@ export default function Personal() {
               venture capital
             </a>{' '}
             and have a strong interest in startups and entrepreneurship. 
-            Beyond software development, I've gained experience across strategy, product development, and marketing through various projects. 
+            Beyond software development, I&apos;ve gained experience across strategy, product development, and marketing through various projects. 
             This interdisciplinary background gives me a comprehensive perspective on bringing innovative ideas from concept to market. 
             I understand both the technical challenges and business considerations involved in creating impactful products.
       
