@@ -1,0 +1,34 @@
+export const metadata = {
+  title: 'Finance RAG – Details',
+  description: '시스템, 파이프라인, 결과, 그리고 인사이트.'
+}
+
+## Overview
+
+**Financial RAG Challenge**는 방대한 재무 문서를 효율적으로 처리할 수 있는 **Retrieval-Augmented Generation (RAG) 시스템**의 발전을 목표로 하는 대회입니다. 참가자들은 대규모 금융 데이터셋에서 관련 문맥을 검색하는 시스템을 구축해야 하며, 금융 용어, 산업 특유의 언어, 수치 데이터 등 실제 문제를 해결하는 능력이 요구됩니다. 통합된 텍스트 및 표 형식의 재무 데이터셋을 활용하여 **nDCG@10** 지표로 검색 정확도를 평가하며, 예선 통과 상위 10개 팀은 본선에서 KB증권 본사에서 프레젠테이션을 진행했습니다.
+
+<div className="not-prose mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <Figure src="/projects/2024_competition_ukp_finance_rag_kb_securities/Task1.png" alt="Task 1" caption="Task 1 – 문서 기반 검색" imgClassName="rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+  <Figure src="/projects/2024_competition_ukp_finance_rag_kb_securities/Task2.png" alt="Task 2" caption="Task 2 – 표/테이블 기반 검색" imgClassName="rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+</div>
+
+## 기술적 구현
+
+<Figure src="/projects/2024_competition_ukp_finance_rag_kb_securities/architecture.png" alt="시스템 아키텍처" caption="RAG 파이프라인과 재순위화 구성" className="my-3" imgClassName="rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+
+복잡한 금융 용어와 혼합 데이터 특성을 고려한 고도화된 RAG pipeline을 개발했습니다. **Query Expansion**을 통해 GPT-4o-mini로 금융 약어와 기업별 용어를 처리하고, BM25 sparse retrieval과 dense semantic search를 결합한 **Hybrid Search**를 구현했습니다. 요약 및 table extraction을 통한 **corpus refinement** 과정을 거쳐, ColBERT와 Voyage AI 등 최신 **reranking model**을 적용하여 특히 tabular dataset에서 상당한 성능 향상을 달성했습니다.
+
+<Figure src="/projects/2024_competition_ukp_finance_rag_kb_securities/leaderboard.png" alt="리더보드 성능" caption="대회 리더보드 성능 (nDCG@10)" className="my-3" imgClassName="rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+
+## 서비스 혁신
+
+기술적 구현을 넘어, 연속적인 질의 패턴을 통해 사용자의 잠재적 의도를 파악하는 **Query Chain 분석 framework**를 제안했습니다. **DIKW**(Data-Information-Knowledge-Wisdom) 계층구조와 **Goal-Means analysis**를 활용하여 사용자의 연속 질의가 어떻게 더 깊은 투자 목표와 의사결정 과정을 드러내는지 입증했습니다. 이러한 insight를 바탕으로 개인화된 content 생성, 실시간 금융 데이터 처리, community 기반 insight를 제공하는 지능형 투자 platform **ZIRASys**를 제안하여, 기존 rule-based chatbot을 사용자 needs를 이해하고 예측하는 능동적 금융 assistant로 전환하는 방안을 제시했습니다.
+
+<Figure src="/projects/2024_competition_ukp_finance_rag_kb_securities/querychain.png" alt="Query Chain 분석" caption="Query Chain 기반 잠재 의도 분석 프레임워크" className="my-3" imgClassName="rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+
+## 자료
+
+- [Slides](/projects/2024_competition_ukp_finance_rag_kb_securities/Slides.pdf)
+- [Report](/projects/2024_competition_ukp_finance_rag_kb_securities/Report.pdf)
+
+

@@ -2,9 +2,21 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { PROJECTS } from '@/app/data'
 
-export default function ProjectDetail({ params }: { params: { id: string } }) {
-  const project = PROJECTS.find((p) => p.id === params.id)
+const PROJECT_CONTENT: Record<string, () => Promise<{ default: React.ComponentType<any> }>> = {
+  'finance-rag': () => import('@/app/content/projects/finance-rag.mdx'),
+  'cheil-idea-festival': () => import('@/app/content/projects/cheil-idea-festival.mdx'),
+  'kaist-mba-sm': () => import('@/app/content/projects/kaist-mba-sm.mdx'),
+}
+
+export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const project = PROJECTS.find((p) => p.id === id)
   if (!project) return notFound()
+  let MDXContent: React.ComponentType | null = null
+  if (PROJECT_CONTENT[id]) {
+    const mod = await PROJECT_CONTENT[id]()
+    MDXContent = mod.default
+  }
 
   return (
     <main className="prose prose-gray mt-24 pb-20 dark:prose-invert">
@@ -12,7 +24,7 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
         ← Back
       </Link>
       <h1>{project.name}</h1>
-      <p>{project.description}</p>
+      {!MDXContent ? <p>{project.description}</p> : null}
 
       <div className="mt-2 flex flex-wrap gap-1">
         {(() => {
@@ -48,12 +60,17 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-              {...(l.kind === 'pdf' ? { download: '' } : {})}
             >
               {l.label}
             </a>
           ))}
         </div>
+      ) : null}
+
+      {MDXContent ? (
+        <article className="prose prose-gray mt-8 dark:prose-invert">
+          <MDXContent />
+        </article>
       ) : null}
     </main>
   )

@@ -5,6 +5,30 @@ import { highlight } from 'sugar-high'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
+    Figure: ({
+      src,
+      alt,
+      caption,
+      className,
+      imgClassName,
+    }: {
+      src: string
+      alt: string
+      caption?: string
+      className?: string
+      imgClassName?: string
+    }) => {
+      return (
+        <figure className={className}>
+          <img src={src} alt={alt} className={imgClassName ?? 'rounded-xl'} />
+          {caption ? (
+            <figcaption className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
+              {caption}
+            </figcaption>
+          ) : null}
+        </figure>
+      )
+    },
     Cover: ({
       src,
       alt,
@@ -17,7 +41,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return (
         <figure>
           <img src={src} alt={alt} className="rounded-xl" />
-          <figcaption className="text-center">{caption}</figcaption>
+          <figcaption className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
         </figure>
       )
     },

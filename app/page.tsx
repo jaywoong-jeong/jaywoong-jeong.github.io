@@ -1,15 +1,7 @@
 'use client'
 import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
-  MorphingDialogClose,
-  MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import { useMemo, useState } from 'react'
@@ -29,6 +21,8 @@ const LINKS = {
   takyeon: 'https://takyeonlee.com/',
   johan: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
   mitSloan: 'https://mitsloan.mit.edu/',
+  vc: 'https://en.wikipedia.org/wiki/Venture_capital',
+  companyK: 'https://kpartners.co.kr/wordpress/en/',
 }
 
 const VARIANTS_CONTAINER = {
@@ -50,55 +44,6 @@ const TRANSITION_SECTION = {
   duration: 0.3,
 }
 
-type ProjectVideoProps = {
-  src: string
-}
-
-function ProjectVideo({ src }: ProjectVideoProps) {
-  return (
-    <MorphingDialog
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.3,
-      }}
-    >
-      <MorphingDialogTrigger>
-        <video
-          src={src}
-          autoPlay
-          loop
-          muted
-          className="aspect-video w-full cursor-zoom-in rounded-xl"
-        />
-      </MorphingDialogTrigger>
-      <MorphingDialogContainer>
-        <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
-          <video
-            src={src}
-            autoPlay
-            loop
-            muted
-            className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
-          />
-        </MorphingDialogContent>
-        <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
-          variants={{
-            initial: { opacity: 0 },
-            animate: {
-              opacity: 1,
-              transition: { delay: 0.3, duration: 0.1 },
-            },
-            exit: { opacity: 0, transition: { duration: 0 } },
-          }}
-        >
-          <XIcon className="h-5 w-5 text-zinc-500" />
-        </MorphingDialogClose>
-      </MorphingDialogContainer>
-    </MorphingDialog>
-  )
-}
 
 function MagneticSocialLink({
   children,
@@ -195,7 +140,7 @@ export default function Personal() {
   }
   return (
     <motion.main
-      className="space-y-24"
+      className="space-y-10"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -206,7 +151,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Hello! I'm an undergraduate student studying Mathematics and Industrial Design at{' '}
+            Hello! I&apos;m an undergraduate student studying Mathematics and Industrial Design at{' '}
             <a
               href={LINKS.kaist}
               target="_blank"
@@ -254,6 +199,23 @@ export default function Personal() {
             . My research focuses on exploring the possibilities of technology and AI in creative domains. 
             I work on developing systems that augment human creativity and enable accessible content creation tools. 
             My goal is to expand creative possibilities by making AI-powered creation tools available to everyone.
+            <br />
+            <br />
+            I've also worked in{' '}
+            <a
+              href={LINKS.companyK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+            >
+              venture capital
+            </a>{' '}
+            and have a strong interest in startups and entrepreneurship. 
+            Beyond software development, I've gained experience across strategy, product development, and marketing through various projects. 
+            This interdisciplinary background gives me a comprehensive perspective on bringing innovative ideas from concept to market. 
+            I understand both the technical challenges and business considerations involved in creating impactful products.
+      
+
           </p>
         </div>
       </motion.section>
@@ -265,8 +227,8 @@ export default function Personal() {
       >
         <h3 className="mb-3 text-lg font-medium">Projects</h3>
         <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-          Below is a collection of work I've done through coursework, competitions, companies, and organizations. 
-          Click on each card to see detailed information.
+          Below is a collection of work I&apos;ve done through coursework, competitions, companies, and organizations. 
+          <br></br><span className="text-blue-600 dark:text-blue-400">Click on each card</span> to see detailed information.
         </p>
         {/* Filters */}
         <ProjectsFilters />
@@ -279,9 +241,15 @@ export default function Personal() {
                   className="absolute inset-0 z-10"
                   aria-label={`View ${project.name} project details`}
                 />
-                <div className="relative z-0 flex items-stretch gap-4 p-2">
+                <div className="relative flex items-stretch gap-4 p-2">
                   <div className="relative h-28 w-40 shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60">
-                    <Image src="/next.svg" alt="placeholder" fill className="object-contain p-6 opacity-70 dark:opacity-60" sizes="(max-width: 768px) 160px, 200px" />
+                    <Image 
+                      src={project.image || '/next.svg'} 
+                      alt={project.imageAlt || 'placeholder'} 
+                      fill 
+                      className={project.image ? 'object-contain' : 'object-contain p-6 opacity-70 dark:opacity-60'} 
+                      sizes="(max-width: 768px) 160px, 200px" 
+                    />
                   </div>
                   <div className="flex min-w-0 flex-col gap-1">
                     <h4 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
@@ -322,7 +290,6 @@ export default function Personal() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="relative z-20 text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                            {...(l.kind === 'pdf' ? { download: '' } : {})}
                           >
                             {l.label}
                           </a>

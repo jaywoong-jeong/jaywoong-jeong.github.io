@@ -1,6 +1,7 @@
 'use client'
 import { TextEffect } from '@/components/ui/text-effect'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SOCIAL_LINKS, EMAIL } from './data'
 
 export function Header() {
@@ -8,7 +9,10 @@ export function Header() {
     <header className="mb-8 flex flex-col gap-6">
       <div>
         <Link href="/" className="font-medium text-black dark:text-white text-2xl">
-          Jaywoong Jeong
+          <span className="inline-flex items-center gap-2">
+            <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} />
+            <span>Jaywoong Jeong</span>
+          </span>
         </Link>
         <TextEffect
           as="p"

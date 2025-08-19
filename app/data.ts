@@ -4,6 +4,8 @@ type Project = {
   description: string
   link?: string
   video?: string
+  image?: string
+  imageAlt?: string
   // New tag system
   context: {
     kind: 'course' | 'competition' | 'organization' | 'company'
@@ -58,28 +60,72 @@ export type Publication = {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'kaist-mba-sm',
-    name: 'KAIST MBA - SM Project',
-    description: 'Marketing strategy project for KAIST MBA (SM).',
-    context: { kind: 'course', name: 'Marketing', code: 'Biz558' },
-    types: ['strategy', 'research'],
-    year: '2023',
-    selected: true,
+    id: 'cuve',
+    name: 'CUVE',
+    description: 'Product design project (prototype and UX flow).',
+    context: { kind: 'course', name: 'Interactive product Design', code: 'ID301' },
+    types: ['design'],
+    year: '2025',
     links: [
-      { label: 'Slides', url: '/projects/kaist-mba-sm/slides.pdf', kind: 'pdf' },
+      { label: 'Design', url: '/projects/cuve/storyboard.pdf', kind: 'pdf' },
+      { label: 'Slides', url: '/projects/cuve/slides.pdf', kind: 'pdf' },
+      { label: 'Demo', url: '/projects/cuve/demo.mp4', kind: 'video' },
+    ],
+  },
+  {
+    id: 'theatre-poster',
+    name: 'Theatre Poster Design',
+    description: 'Poster design for a theatre production.',
+    context: { kind: 'organization', name: 'Theatre Club' },
+    types: ['design'],
+    year: '2025',
+    image: '/projects/2025_organization_ibagutor_poster_md_design/Poster.png',
+    imageAlt: 'Theatre poster design',
+    links: [
+      { label: 'Design', url: '/projects/theatre-poster/design.png', kind: 'image' },
+      { label: 'External', url: 'https://tumblbug.com/', kind: 'link' },
     ],
   },
   {
     id: 'finance-rag',
-    name: 'Finance RAG',
-    description: 'RAG-based financial information retrieval and Q&A system.',
+    name: 'Financial RAG Pipeline & Product Development',
+    description: 'Built RAG-based financial information retrieval and QA system. Proposed Query Chain framework for latent user intent analysis. 4th UNIST-KAIST-POSTECH Data Science Competition 3rd place.',
     context: { kind: 'competition', name: '4회 UNIST-KAIST-POSTECH 데이터사이언스 경진대회', award: '은상' },
     types: ['strategy', 'research'],
     year: '2024',
     selected: true,
+    image: '/projects/2024_competition_ukp_finance_rag_kb_securities/Cover.png',
+    imageAlt: 'Finance RAG cover',
     links: [
-      { label: 'Slides', url: '/projects/finance-rag/slides.pdf', kind: 'pdf' },
+      { label: 'Slides', url: '/projects/2024_competition_ukp_finance_rag_kb_securities/Slides.pdf', kind: 'pdf' },
+      { label: 'Report', url: '/projects/2024_competition_ukp_finance_rag_kb_securities/Report.pdf', kind: 'pdf' },
       { label: 'External', url: 'https://biz.heraldcorp.com/article/10389646', kind: 'link' },
+    ],
+  },
+  {
+    id: 'network-analysis-kr-finance',
+    name: 'Network Analysis of Korean Financial Markets During Economic Crises',
+    description:
+      'Network analysis of KR financial market linkages during crises.',
+    context: { kind: 'course', name: 'AI for Finance', code: 'IE471' },
+    types: ['research'],
+    year: '2024',
+    links: [
+      { label: 'Report', url: '/projects/network-analysis-kr-finance/slides.pdf', kind: 'pdf' },
+    ],
+  },
+  {
+    id: 'kaist-mba-sm',
+    name: 'SM Entertainment Global Viral Marketing Strategy',
+    description: 'KAIST MBA BIZ558 Marketing term project. Developed SM Entertainment\'s global viral marketing strategy using TikTok and Spotify API data. Selected to present findings to C-level executives at SM Entertainment headquarters.',
+    context: { kind: 'course', name: 'Marketing', code: 'Biz558' },
+    types: ['strategy', 'research'],
+    year: '2023',
+    selected: true,
+    image: '/projects/2023_course_biz558_sm_global_marketing_strategy/cover.JPG',
+    imageAlt: 'KAIST MBA project cover',
+    links: [
+      { label: 'Slides', url: '/projects/kaist-mba-sm/slides.pdf', kind: 'pdf' },
     ],
   },
   {
@@ -90,9 +136,12 @@ export const PROJECTS: Project[] = [
     types: ['strategy', 'design'],
     year: '2023',
     selected: true,
+    image: '/projects/2023_competition_cheil_idea_festival_albamon_campaign/cover.png',
+    imageAlt: 'Cheil Idea Festival cover',
     links: [
       { label: 'Design', url: '/projects/cheil-idea-festival/storyboard.pdf', kind: 'pdf' },
       { label: 'Slides', url: '/projects/cheil-idea-festival/slides.pdf', kind: 'pdf' },
+      { label: 'Report', url: '/projects/cheil-idea-festival-presentation.pdf', kind: 'pdf' },
       { label: 'Video', url: '/projects/cheil-idea-festival/video.mp4', kind: 'video' },
     ],
   },
@@ -109,19 +158,6 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: 'cuve',
-    name: 'CUVE',
-    description: 'Product design project (prototype and UX flow).',
-    context: { kind: 'course', name: 'Interactive product Design', code: 'ID301' },
-    types: ['design'],
-    year: '2025',
-    links: [
-      { label: 'Design', url: '/projects/cuve/storyboard.pdf', kind: 'pdf' },
-      { label: 'Slides', url: '/projects/cuve/slides.pdf', kind: 'pdf' },
-      { label: 'Demo', url: '/projects/cuve/demo.mp4', kind: 'video' },
-    ],
-  },
-  {
     id: 'icist-scof',
     name: 'ICIST SCOF',
     description: 'Organized and hosted a conference session.',
@@ -133,30 +169,6 @@ export const PROJECTS: Project[] = [
       { label: 'Design', url: '/projects/icist-scof/poster.pdf', kind: 'pdf' },
       { label: 'Video', url: 'https://www.youtube.com/watch?v=5bC7OLrdrHQ', kind: 'video' },
       { label: 'External', url: 'https://www.notion.so/', kind: 'link' },
-    ],
-  },
-  {
-    id: 'theatre-poster',
-    name: 'Theatre Poster Design',
-    description: 'Poster design for a theatre production.',
-    context: { kind: 'organization', name: 'Theatre Club' },
-    types: ['design'],
-    year: '2025',
-    links: [
-      { label: 'Design', url: '/projects/theatre-poster/design.png', kind: 'image' },
-      { label: 'External', url: 'https://tumblbug.com/', kind: 'link' },
-    ],
-  },
-  {
-    id: 'network-analysis-kr-finance',
-    name: 'Network Analysis of Korean Financial Markets During Economic Crises',
-    description:
-      'Network analysis of KR financial market linkages during crises.',
-    context: { kind: 'course', name: 'AI for Finance', code: 'IE471' },
-    types: ['research'],
-    year: '2023',
-    links: [
-      { label: 'Report', url: '/projects/network-analysis-kr-finance/slides.pdf', kind: 'pdf' },
     ],
   },
 ]
@@ -182,7 +194,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'MIT Sloan School of Management - Chu Lab',
     title: 'Research Assistant',
     start: 'Mar 2024',
-    end: 'Feb 2025',
+    end: 'Present',
     link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
     id: 'work-mit-chu-2024',
   },
@@ -284,7 +296,7 @@ export const PUBLICATIONS: Publication[] = [
     link: '/publications/DramaForge_UnderReview.pdf',
     id: 'pub-dramaforge-2025',
     tags: ['LLM', 'Creativity Support', 'HCI'],
-    image: '/publications/DramaForge Cover.png',
+    image: '/publications/DramaForge-Cover.png',
     imageAlt: 'DramaForge cover',
   },
   {
@@ -295,7 +307,7 @@ export const PUBLICATIONS: Publication[] = [
     year: '2024-',
     status: 'Work in progress',
     id: 'pub-attention-misdirection-wip',
-    image: '/publications/placeholder.png',
+    image: '/publications/image.png',
     imageAlt: 'Placeholder image',
   }
 ]
