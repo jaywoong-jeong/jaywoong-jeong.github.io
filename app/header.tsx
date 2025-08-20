@@ -77,11 +77,7 @@ export function Header() {
               Work
             </a>
           </li>
-          <li>
-            <a href="#blog" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Blog
-            </a>
-          </li>
+          
         </ul>
       </nav>
     </header>
