@@ -218,45 +218,37 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-1',
+    title: '배달앱 별점에 관하여',
+    description: '별점이 만드는 인센티브, 왜곡, 그리고 개선 아이디어.',
+    link: '/blog/delivery-app-ratings',
+    uid: 'blog-delivery-app-ratings',
   },
   {
-    title: 'Why I left my job to start my own company',
-    description:
-      'A deep dive into my decision to leave my job and start my own company',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-2',
+    title: '급식을 남기지 않는 법',
+    description: '남김 없이 맛있게 먹는 작은 습관과 루틴.',
+    link: '/blog/how-not-to-leave-lunch',
+    uid: 'blog-how-not-to-leave-lunch',
   },
   {
-    title: 'What I learned from my first year of freelancing',
-    description:
-      'A look back at my first year of freelancing and what I learned',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-3',
-  },
-  {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
-    uid: 'blog-4',
+    title: '운 9, 실력 1',
+    description: '운과 실력의 비율을 다시 생각해보는 짧은 에세이.',
+    link: '/blog/luck-9-skill-1',
+    uid: 'blog-luck-9-skill-1',
   },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
+    link: 'https://www.linkedin.com/in/jaywoong-jeong/',
   },
   {
     label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    link: 'https://www.instagram.com/jaywoong.jeong',
   },
   {
-    label: 'Github',
-    link: 'https://github.com/ibelick',
+    label: 'GitHub',
+    link: 'https://github.com/jaywoong-jeong',
   }
 ]
 
