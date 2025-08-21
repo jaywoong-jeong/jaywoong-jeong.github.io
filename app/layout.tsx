@@ -18,10 +18,32 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: 'Jaywoong Jeong',
-    template: '%s | Jaywoong Jeong'
+    default: '정재웅 (Jaywoong Jeong)',
+    template: '%s | 정재웅'
   },
-  description:  'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
+  description:  '정재웅(Jaywoong Jeong) — KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오. 프로젝트, 연구, 전략, 제품 작업을 소개합니다.',
+  keywords: [
+    '정재웅',
+    'Jaywoong Jeong',
+    'KAIST',
+    '한국과학기술원',
+    '민사고',
+    'Minjok Leadership Academy',
+    'HCI',
+    'Human-Computer Interaction',
+    '디자인',
+    'AI',
+    '포트폴리오'
+  ],
+  openGraph: {
+    title: '정재웅 (Jaywoong Jeong)',
+    description: 'KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오',
+    url: 'https://nim-fawn.vercel.app/',
+    siteName: '정재웅 포트폴리오',
+    locale: 'ko_KR',
+    type: 'website'
+  },
+  authors: [{ name: '정재웅 (Jaywoong Jeong)' }],
   icons: {
     icon: '/logo.svg',
     shortcut: '/logo.svg',
@@ -44,8 +66,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jaywoong Jeong (정재웅)',
+    alternateName: ['정재웅', 'Jaywoong Jeong'],
+    url: 'https://nim-fawn.vercel.app/',
+    alumniOf: ['KAIST', '한국과학기술원', '민족사관고등학교'],
+    knowsAbout: ['HCI', 'Human-Computer Interaction', 'Design', 'AI'],
+    sameAs: [
+      'https://www.linkedin.com/in/jaywoong-jeong/',
+      'https://github.com/jaywoong-jeong',
+      'https://www.instagram.com/jaywoong.jeong'
+    ]
+  };
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
@@ -70,6 +106,7 @@ export default function RootLayout({
             </div>
           </div>
         </ThemeProvider>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Analytics />
       </body>
     </html>
