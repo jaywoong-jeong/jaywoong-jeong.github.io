@@ -63,19 +63,19 @@ export function Header() {
       <nav aria-label="Primary" className="text-sm">
         <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
           <li>
-            <a href="/#projects" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/#projects" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
               Projects
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
               Work
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
               Research
-            </a>
+            </Link>
           </li>
           
         </ul>
