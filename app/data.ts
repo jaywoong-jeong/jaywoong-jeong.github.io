@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
     context: { kind: 'course', name: 'Interactive Product Design', code: 'ID301' },
     types: ['design', 'product'],
     year: '2025',
-    image: '/projects/2025_course_id301_cuve_interactive_product_design/cover.png',
+    image: '/projects/2025_course_id301_cuve_interactive_product_design/IPD Final.png',
     imageAlt: 'CUVE cover image',
     links: [
       { label: 'Slides', url: '/projects/2025_course_id301_cuve_interactive_product_design/Slides.pdf', kind: 'pdf' },
