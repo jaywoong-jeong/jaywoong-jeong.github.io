@@ -151,7 +151,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Hello! I&apos;m an undergraduate student studying Mathematics and Industrial Design at{' '}
+            Hello! I&apos;m an undergraduate student studying Mathematical Science and Industrial Design at{' '}
             <a
               href={LINKS.kaist}
               target="_blank"

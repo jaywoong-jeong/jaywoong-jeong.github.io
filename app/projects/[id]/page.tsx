@@ -10,6 +10,7 @@ const PROJECT_CONTENT: Record<string, () => Promise<{ default: React.ComponentTy
   'new-space': () => import('@/app/content/projects/new-space.mdx'),
   'network-analysis-kr-finance': () => import('@/app/content/projects/network-analysis-kr-finance.mdx'),
   'cuve': () => import('@/app/content/projects/cuve.mdx'),
+  'icist-scof': () => import('@/app/content/projects/icist-scof.mdx'),
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
