@@ -241,22 +241,22 @@ export default function Personal() {
                   className="absolute inset-0 z-10"
                   aria-label={`View ${project.name} project details`}
                 />
-                <div className="relative flex items-stretch gap-4 p-2">
-                  <div className="relative h-28 w-40 shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60">
+                <div className="relative flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
+                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
                     <Image 
                       src={project.image || '/next.svg'} 
                       alt={project.imageAlt || 'placeholder'} 
                       fill 
-                      className={project.image ? 'object-contain' : 'object-contain p-6 opacity-70 dark:opacity-60'} 
-                      sizes="(max-width: 768px) 160px, 200px" 
+                      className={project.image ? 'object-cover sm:object-contain' : 'object-contain p-6 opacity-70 dark:opacity-60'} 
+                      sizes="(max-width: 640px) 100vw, 200px" 
                     />
                   </div>
-                  <div className="flex min-w-0 flex-col gap-1">
-                    <h4 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
+                  <div className="mt-2 flex min-w-0 flex-col gap-1 sm:mt-0">
+                    <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">
                       {project.name}
                       <span className="block h-[1px] max-w-0 bg-zinc-900 transition-all duration-200 group-hover/card:max-w-full dark:bg-zinc-50"></span>
                     </h4>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{project.description}</p>
+                    <p className="text-sm text-zinc-600 break-words hyphens-auto dark:text-zinc-400">{project.description}</p>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {(() => {
                         const mapColor: Record<string, string> = {
@@ -333,7 +333,7 @@ export default function Personal() {
                       {job.company}
                     </p>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400 sm:text-right">
+                  <p className="whitespace-nowrap text-zinc-600 dark:text-zinc-400 sm:text-right">
                     {job.start} - {job.end}
                   </p>
                 </div>
@@ -390,7 +390,7 @@ export default function Personal() {
                         href={pub.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-auto inline-block text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                        className="ml-0 mt-2 inline-block basis-full text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100 sm:ml-auto sm:mt-0 sm:basis-auto"
                       >
                         Paper
                       </a>
