@@ -6,9 +6,9 @@ import { SOCIAL_LINKS, EMAIL } from './data'
 
 export function Header() {
   return (
-    <header className="mb-8 flex flex-col gap-6">
+    <header className="mb-8 flex flex-col gap-3 sm:gap-4">
       <div>
-        <Link href="/" className="font-medium text-black dark:text-white text-2xl">
+        <Link href="/" className="font-medium text-black dark:text-white text-xl sm:text-2xl">
           <span className="inline-flex items-center gap-2">
             <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} />
             <span>Jaywoong Jeong</span>
@@ -18,7 +18,7 @@ export function Header() {
           as="p"
           preset="fade"
           per="char"
-          className="text-zinc-600 dark:text-zinc-500"
+          className="line-clamp-1 text-sm text-zinc-600 dark:text-zinc-500 sm:line-clamp-none sm:text-base"
           delay={0.5}
         >
           Math & Design @ KAIST

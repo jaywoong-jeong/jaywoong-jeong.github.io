@@ -57,7 +57,7 @@ export default function RootLayout({
           forcedTheme="light"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-20">
+            <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
               <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
                 <aside className="lg:sticky lg:top-20 self-start">
                   <Header />
