@@ -169,6 +169,9 @@ export const PROJECTS: Project[] = [
     context: { kind: 'organization', name: 'ICIST / SCOF' },
     types: ['strategy'],
     year: '2022',
+    image: '/projects/2022_organization_icists_scof_science_communication/cover.png',
+    imageAlt: 'SCOF 2022 행사 현장',
+    
     links: [
       { label: 'Report', url: '/projects/2022_organization_icists_scof_science_communication/Report.pdf', kind: 'pdf' },
       { label: 'Design', url: '/projects/2022_organization_icists_scof_science_communication/Brochure.pdf', kind: 'pdf' },
