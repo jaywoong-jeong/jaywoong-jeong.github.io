@@ -225,7 +225,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-3 text-lg font-medium">Projects</h3>
+        <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Projects</h3>
         <p className="mb-5 text-zinc-600 dark:text-zinc-400">
           Below is a collection of work I&apos;ve done through coursework, competitions, companies, and organizations. 
           <br></br><span className="text-blue-600 dark:text-blue-400">Click on each card</span> to see detailed information.
@@ -309,7 +309,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
+        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
@@ -355,7 +355,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Research</h3>
+        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Research</h3>
         <ul className="space-y-4">
           {PUBLICATIONS.map((pub) => (
             <li key={pub.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
