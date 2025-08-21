@@ -6,6 +6,10 @@ const PROJECT_CONTENT: Record<string, () => Promise<{ default: React.ComponentTy
   'finance-rag': () => import('@/app/content/projects/finance-rag.mdx'),
   'cheil-idea-festival': () => import('@/app/content/projects/cheil-idea-festival.mdx'),
   'kaist-mba-sm': () => import('@/app/content/projects/kaist-mba-sm.mdx'),
+  'theatre-poster': () => import('@/app/content/projects/theatre-poster.mdx'),
+  'new-space': () => import('@/app/content/projects/new-space.mdx'),
+  'network-analysis-kr-finance': () => import('@/app/content/projects/network-analysis-kr-finance.mdx'),
+  'cuve': () => import('@/app/content/projects/cuve.mdx'),
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {

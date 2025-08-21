@@ -1,0 +1,33 @@
+export const metadata = {
+  title: 'CUVE: Concentration Unit for Variable Efforts',
+  description: 'ID301 Interactive Product Design Term Project. 아두이노/임베디드 기반으로 한 학기 동안 물리+소프트 제품을 만드는 수업에서, 추상적인 시간을 직관적 감각으로 전환하는 하이브리드 타이머를 설계/제작.'
+}
+
+<Cover src="/projects/2025_course_id301_cuve_interactive_product_design/cover.png" alt="CUVE Cover" caption="Turning Abstract Time into a Sensory Experience" />
+
+본 프로젝트는 KAIST ID301 Interactive Product Design의 학기말 프로젝트로, 아두이노 등 임베디드/센서 기반 하드웨어와 모바일 앱을 결합한 상호작용 제품을 직접 설계·제작하는 것을 목표로 했습니다.
+
+### 작동 원리: 뒤집으면 전환, 모든 시간은 자동 기록
+
+큐브의 각 면을 특정 과제에 매핑하고, 기기를 뒤집는 제스처만으로 과제가 즉시 전환됩니다. 자이로/가속도 센서를 통해 현재 면을 지속적으로 판별하여 기록 누락 없이 타임라인을 구성하고, 전환 시각·체류 시간·연속 집중 시간 등을 자동 집계합니다. 수집된 데이터는 모바일 앱과 실시간 동기화되어 사용자가 기기를 건드리지 않아도 분석이 이어집니다.
+
+### 제작 과정: 아이디어에서 제품까지
+
+- Phase 1 — 웹 기반 컨셉: 상호작용 플로우와 정보 구조를 UI 프로토타입으로 검증
+- Phase 2 — MDF 큐브 + React Native: MPU-6050 기반 자세 인식으로 물리 인터랙션과 핵심 기능 테스트
+- Phase 3 — 3D 프린팅 + Swift: 최종 폼팩터와 사용성 개선, 안정적인 모바일 앱 연동으로 데모 완성
+
+<div className="not-prose mx-auto max-w-prose sm:pl-6">
+  <Figure src="/projects/2025_course_id301_cuve_interactive_product_design/image_3.png" alt="Prototype Evolution" caption="프로토타입 진화: 웹 → MDF+React Native → 3D 프린팅+Swift" imgClassName="w-full rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+  </div>
+
+### 앱 시각화: 집중 패턴을 한눈에
+
+앱에서는 과제별 누적 집중 시간, 전환 빈도, 요일/시간대별 집중 리듬을 시각화합니다. 주간·일간 요약과 비교 뷰를 통해 ‘어디에 시간을 쓰고 있는지’, ‘전환이 과도한지’, ‘목표 대비 흐름이 유지되는지’를 빠르게 점검할 수 있습니다.
+
+<div className="not-prose mx-auto max-w-prose sm:pl-6 grid grid-cols-1 gap-3 sm:grid-cols-2 place-items-center">
+  <Figure src="/projects/2025_course_id301_cuve_interactive_product_design/image_1.png" alt="App Visualization 1" caption="모바일 앱 홈 화면" imgClassName="w-full rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+  <Figure src="/projects/2025_course_id301_cuve_interactive_product_design/image_2.png" alt="App Visualization 2" caption="전환 패턴 및 주간 요약" imgClassName="w-full rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+  </div>
+
+

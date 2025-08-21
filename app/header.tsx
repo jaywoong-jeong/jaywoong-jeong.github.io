@@ -68,13 +68,13 @@ export function Header() {
             </a>
           </li>
           <li>
-            <a href="#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Research
+            <a href="#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+              Work
             </a>
           </li>
           <li>
-            <a href="#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Work
+            <a href="#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+              Research
             </a>
           </li>
           

@@ -1,0 +1,22 @@
+export const metadata = {
+  title: '한국 금융시장 네트워크 분석',
+  description: '경제 위기 전후 산업 구조 변화를 네트워크로 분석하고 투자 시사점을 도출'
+}
+
+본 프로젝트는 KAIST 대학원 과목 IE471 ‘AI for Finance’의 Term Project로 수행되었습니다.
+
+### 연구 개요
+
+한국 증시(KOSPI)의 주요 위기 구간(1997 IMF, 2008 서브프라임, 2020 코로나19) 전후로 산업 간 연결 구조가 어떻게 변하는지 네트워크 분석(MST, 중심성, 커뮤니티 탐지)으로 살폈습니다. 위기 국면에서는 전체 중심성이 높아지고 커뮤니티 수가 줄어드는 경향이 관찰되어, 충격에 대한 시장의 동조화가 강화됨을 확인했습니다. 또한 위기 전에는 증권·금융 업종이 네트워크 중심에 위치했으나, 위기 이후에는 원자재·중후장대·테크/플랫폼 등 실물/디지털 전환 축이 중심으로 이동하는 패턴이 반복적으로 나타났습니다.
+
+### 수행 맥락 및 시사점
+
+본 프로젝트는 KAIST 대학원 과목인 AI for Finance에서 수행했으며, 학부 1학년으로서 대학원생 3명과 팀을 이뤄 데이터 전처리–그래프 구성–지표 산출–시각화–해석까지 전 과정을 함께 진행했습니다. 중심성 기반으로 섹터(상위/중위/하위)를 재정의하고 효율적 포트폴리오 프론티어를 도출하여, 위기 이전·이후에 요구되는 섹터 비중 조정 전략의 방향성을 제시했습니다.
+
+
+<div className="not-prose mx-auto max-w-prose sm:pl-6 grid grid-cols-1 gap-3 sm:grid-cols-2 place-items-center">
+  <Figure src="/projects/2024_course_ie471_ai_finance_network_analysis/image_1.png" alt="서브프라임 전후 MST" caption="서브프라임 위기 전·후 MST" imgClassName="w-full rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+  <Figure src="/projects/2024_course_ie471_ai_finance_network_analysis/image_2.png" alt="코로나19 전후 MST" caption="코로나19 전·후 MST" imgClassName="w-full rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60" />
+</div>
+
+
