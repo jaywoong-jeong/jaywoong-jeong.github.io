@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nim-fawn.vercel.app/'),
+  metadataBase: new URL('https://jaywoong.me/'),
   alternates: {
     canonical: '/'
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Jaywoong Jeong',
     description: 'KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오',
-    url: 'https://nim-fawn.vercel.app/',
+    url: 'https://jaywoong.me/',
     siteName: 'Jaywoong Jeong',
     locale: 'ko_KR',
     type: 'website'
@@ -71,7 +71,7 @@ export default function RootLayout({
     '@type': 'Person',
     name: 'Jaywoong Jeong (정재웅)',
     alternateName: ['정재웅', 'Jaywoong Jeong'],
-    url: 'https://nim-fawn.vercel.app/',
+    url: 'https://jaywoong.me/',
     alumniOf: ['KAIST', '한국과학기술원', '민족사관고등학교'],
     knowsAbout: ['HCI', 'Human-Computer Interaction', 'Design', 'AI'],
     sameAs: [
