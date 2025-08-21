@@ -151,7 +151,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Hello! I&apos;m an undergraduate student studying Mathematical Science and Industrial Design at{' '}
+            Hello! I&apos;m an undergraduate studying Mathematical Science and Industrial Design at{' '}
             <a
               href={LINKS.kaist}
               target="_blank"
@@ -196,12 +196,7 @@ export default function Personal() {
             >
               MIT Sloan
             </a>
-            . My research focuses on exploring the possibilities of technology and AI in creative domains. 
-            I work on developing systems that augment human creativity and enable accessible content creation tools. 
-            My goal is to expand creative possibilities by making AI-powered creation tools available to everyone.
-            <br />
-            <br />
-            I&apos;ve also worked in{' '}
+            . My research focuses on AI creativity augmentation tools and their societal impact from Computational Social Science and HCI perspectives. My background in{' '}
             <a
               href={LINKS.companyK}
               target="_blank"
@@ -210,12 +205,7 @@ export default function Personal() {
             >
               venture capital
             </a>{' '}
-            and have a strong interest in startups and entrepreneurship. 
-            Beyond software development, I&apos;ve gained experience across strategy, product development, and marketing through various projects. 
-            This interdisciplinary background gives me a comprehensive perspective on bringing innovative ideas from concept to market. 
-            I understand both the technical challenges and business considerations involved in creating impactful products.
-      
-
+            and experience across strategy, product development, and marketing give me both technical and business perspectives for building impactful products.
           </p>
         </div>
       </motion.section>

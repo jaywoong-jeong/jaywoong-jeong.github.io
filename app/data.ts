@@ -292,7 +292,7 @@ export const PUBLICATIONS: Publication[] = [
     year: '2025',
     status: 'Under Review, 2025',
     description:
-      "Theatrical script adaptation requires complex manual effort. DramaForge employs LLMs to analyze a script’s structural dependencies and proposes targeted adaptation options (e.g., merging roles, cutting subplots) that satisfy user-defined constraints, supporting a co-creative workflow while retaining human creative control.",
+      "Proposes DramaForge, a system that uses LLMs to analyze script structure and suggest targeted theatrical adaptations while maintaining human creative control.",
     link: '/publications/DramaForge_UnderReview.pdf',
     id: 'pub-dramaforge-2025',
     tags: ['LLM', 'Creativity Support', 'HCI'],
