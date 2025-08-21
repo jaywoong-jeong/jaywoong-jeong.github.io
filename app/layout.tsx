@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: '정재웅 (Jaywoong Jeong)',
-    template: '%s | 정재웅'
+    default: 'Jaywoong Jeong',
+    template: '%s | Jaywoong Jeong'
   },
   description:  '정재웅(Jaywoong Jeong) — KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오. 프로젝트, 연구, 전략, 제품 작업을 소개합니다.',
   keywords: [
@@ -36,14 +36,14 @@ export const metadata: Metadata = {
     '포트폴리오'
   ],
   openGraph: {
-    title: '정재웅 (Jaywoong Jeong)',
+    title: 'Jaywoong Jeong',
     description: 'KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오',
     url: 'https://nim-fawn.vercel.app/',
-    siteName: '정재웅 포트폴리오',
+    siteName: 'Jaywoong Jeong',
     locale: 'ko_KR',
     type: 'website'
   },
-  authors: [{ name: '정재웅 (Jaywoong Jeong)' }],
+  authors: [{ name: 'Jaywoong Jeong' }],
   icons: {
     icon: '/logo.svg',
     shortcut: '/logo.svg',
