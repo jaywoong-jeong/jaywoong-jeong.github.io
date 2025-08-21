@@ -324,7 +324,7 @@ export default function Personal() {
                 size={64}
               />
               <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row justify-between">
+                <div className="relative flex w-full flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <h4 className="font-normal dark:text-zinc-100">
                       {job.title}
@@ -333,7 +333,7 @@ export default function Personal() {
                       {job.company}
                     </p>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400">
+                  <p className="text-zinc-600 dark:text-zinc-400 sm:text-right">
                     {job.start} - {job.end}
                   </p>
                 </div>
@@ -381,7 +381,7 @@ export default function Personal() {
                   {pub.description && (
                     <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{pub.description}</p>
                   )}
-                  <div className="mt-2 flex items-center gap-2">
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
                     {pub.tags?.map((tag) => (
                       <span key={tag} className="rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{tag}</span>
                     ))}
