@@ -42,6 +42,35 @@ export const theme = {
     headerHeight: '60px',
     borderRadius: '2px',
     borderRadiusLarge: '4px'
+  },
+  // 반응형 브레이크포인트 추가
+  breakpoints: {
+    mobile: '768px',
+    tablet: '1024px',
+    desktop: '1025px'
+  },
+  // 모바일용 설정 추가
+  mobile: {
+    headerHeight: '50px',
+    spacing: {
+      xs: '0.5rem',
+      sm: '0.75rem',
+      md: '1.25rem',
+      lg: '2rem',
+      xl: '2.5rem',
+      xxl: '3rem',
+      xxxl: '4rem'
+    },
+    fonts: {
+      sizes: {
+        xs: '0.875rem',    // 14px
+        sm: '1rem',        // 16px
+        md: '1.125rem',    // 18px
+        lg: '1.25rem',     // 20px
+        xl: '1.5rem',      // 24px
+        xxl: '1.75rem'     // 28px
+      }
+    }
   }
 } as const;
 

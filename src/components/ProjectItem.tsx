@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
+import { media, mobileCardStyles, touchOptimized } from '../styles/mixins';
 import { Card, InfoGrid } from './ui/Card';
 import { Link } from './ui/Button';
 
@@ -21,6 +22,13 @@ const ProjectImageContainer = styled.div`
   background-color: ${theme.colors.background};
   border-radius: ${theme.layout.borderRadius};
   overflow: hidden;
+  
+  /* 모바일: 이미지 높이와 여백 조정 */
+  ${media.mobile} {
+    height: 200px;
+    margin-bottom: ${theme.mobile.spacing.md};
+    border-radius: ${theme.layout.borderRadiusLarge};
+  }
 `;
 
 const ProjectImage = styled.img`
@@ -28,21 +36,43 @@ const ProjectImage = styled.img`
   max-height: 100%;
   object-fit: contain;
   border-radius: ${theme.layout.borderRadius};
+  
+  /* 모바일: 이미지 최적화 */
+  ${media.mobile} {
+    border-radius: ${theme.layout.borderRadiusLarge};
+  }
 `;
 
 const ProjectNumber = styled.div`
   font-weight: ${theme.fonts.weights.medium};
   color: ${theme.colors.primary};
+  
+  /* 모바일: 폰트 크기 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.md};
+    margin-bottom: ${theme.mobile.spacing.sm};
+  }
 `;
 
 const Details = styled.div`
   color: ${theme.colors.secondary};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.sm};
+    line-height: 1.5;
+  }
+`;
+
+const ProjectCard = styled(Card)`
+  /* 모바일: 카드 스타일 적용 */
+  ${mobileCardStyles}
 `;
 
 function ProjectItem({ imageUrl, imageAlt, projectNumber, details, moreLink }: ProjectItemProps) {
   const resolveSrc = (p: string) => p; // base is '/'
   return (
-    <Card>
+    <ProjectCard>
       <a href={moreLink}>
         <ProjectImageContainer>
           <ProjectImage src={resolveSrc(imageUrl)} alt={imageAlt} />
@@ -56,9 +86,11 @@ function ProjectItem({ imageUrl, imageAlt, projectNumber, details, moreLink }: P
           <Link href={moreLink}>[More..]</Link>
         </Details>
       </InfoGrid>
-    </Card>
+    </ProjectCard>
   );
 }
 
 export default ProjectItem;
+
+
 

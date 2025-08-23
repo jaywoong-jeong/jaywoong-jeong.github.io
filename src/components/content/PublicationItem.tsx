@@ -5,15 +5,27 @@ import { Link } from '../ui/Button';
 import type { PublicationData } from '../../types';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
+import { media, mobileCardStyles } from '../../styles/mixins';
 
 const PublicationJournal = styled.div`
   font-size: ${theme.fonts.sizes.xl};
   color: ${theme.colors.accent};
   margin-bottom: ${theme.spacing.sm};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.lg};
+    margin-bottom: ${theme.mobile.spacing.md};
+  }
 `;
 
 const PublicationContainer = styled.div`
   font-size: 0.67em;
+  
+  /* 모바일: 폰트 크기 조정 */
+  ${media.mobile} {
+    font-size: 1em;
+  }
 `;
 
 const Links = styled.div`
@@ -21,6 +33,17 @@ const Links = styled.div`
   display: flex;
   gap: ${theme.spacing.sm};
   flex-wrap: wrap;
+  
+  /* 모바일: 여백과 간격 조정 */
+  ${media.mobile} {
+    margin-top: ${theme.mobile.spacing.md};
+    gap: ${theme.mobile.spacing.md};
+  }
+`;
+
+const PublicationCard = styled(ItemCard)`
+  /* 모바일: 카드 스타일 적용 */
+  ${mobileCardStyles}
 `;
 
 interface PublicationItemProps {
@@ -42,7 +65,7 @@ export const PublicationItem: React.FC<PublicationItemProps> = ({ publication })
 
   return (
     <PublicationContainer>
-      <ItemCard>
+      <PublicationCard>
         <ItemTitle>{publication.id}. {publication.title}</ItemTitle>
         <ItemSubtitle>{renderAuthorsBold(publication.authors)}</ItemSubtitle>
         <PublicationJournal>{publication.journal}, {publication.year}</PublicationJournal>
@@ -57,7 +80,7 @@ export const PublicationItem: React.FC<PublicationItemProps> = ({ publication })
             )}
           </Links>
         )}
-      </ItemCard>
+      </PublicationCard>
     </PublicationContainer>
   );
 };

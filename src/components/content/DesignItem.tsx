@@ -5,11 +5,18 @@ import { Link } from '../ui/Button';
 import type { ArtworkData } from '../../types';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
+import { media, mobileCardStyles } from '../../styles/mixins';
 
 const DesignYear = styled.div`
   font-size: ${theme.fonts.sizes.xl};
   color: ${theme.colors.accent};
   margin-bottom: ${theme.spacing.sm};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.lg};
+    margin-bottom: ${theme.mobile.spacing.md};
+  }
 `;
 
 const DesignImageContainer = styled.div`
@@ -21,6 +28,13 @@ const DesignImageContainer = styled.div`
   background-color: ${theme.colors.background};
   border-radius: ${theme.layout.borderRadius};
   overflow: hidden;
+  
+  /* 모바일: 이미지 높이와 여백 조정 */
+  ${media.mobile} {
+    height: 250px;
+    margin-bottom: ${theme.mobile.spacing.md};
+    border-radius: ${theme.layout.borderRadiusLarge};
+  }
 `;
 
 const DesignImage = styled.img`
@@ -28,6 +42,11 @@ const DesignImage = styled.img`
   max-height: 100%;
   object-fit: contain;
   border-radius: ${theme.layout.borderRadius};
+  
+  /* 모바일: 이미지 최적화 */
+  ${media.mobile} {
+    border-radius: ${theme.layout.borderRadiusLarge};
+  }
 `;
 
 const DesignContent = styled.div`
@@ -40,6 +59,12 @@ const CourseInfo = styled.div`
   color: ${theme.colors.tertiary};
   font-style: italic;
   margin-bottom: ${theme.spacing.sm};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.sm};
+    margin-bottom: ${theme.mobile.spacing.md};
+  }
 `;
 
 const LinksContainer = styled.div`
@@ -47,6 +72,17 @@ const LinksContainer = styled.div`
   gap: ${theme.spacing.sm};
   margin-top: ${theme.spacing.sm};
   flex-wrap: wrap;
+  
+  /* 모바일: 여백과 간격 조정 */
+  ${media.mobile} {
+    gap: ${theme.mobile.spacing.md};
+    margin-top: ${theme.mobile.spacing.md};
+  }
+`;
+
+const DesignCard = styled(ItemCard)`
+  /* 모바일: 카드 스타일 적용 */
+  ${mobileCardStyles}
 `;
 
 interface DesignItemProps {
@@ -56,7 +92,7 @@ interface DesignItemProps {
 export const DesignItem: React.FC<DesignItemProps> = ({ artwork }) => {
   const resolveSrc = (p?: string) => p; // base is '/'
   return (
-    <ItemCard>
+    <DesignCard>
       {artwork.image && (
         <DesignImageContainer>
           <DesignImage 
@@ -87,6 +123,6 @@ export const DesignItem: React.FC<DesignItemProps> = ({ artwork }) => {
           </LinksContainer>
         )}
       </DesignContent>
-    </ItemCard>
+    </DesignCard>
   );
 };

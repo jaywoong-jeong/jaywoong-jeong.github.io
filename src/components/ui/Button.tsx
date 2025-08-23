@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
+import { media, touchOptimized } from '../../styles/mixins';
 
 export const MenuButton = styled.button`
   background: none;
@@ -8,6 +9,11 @@ export const MenuButton = styled.button`
   cursor: pointer;
   margin-top: 0;
   position: relative;
+  
+  /* 모바일: 터치 최적화 */
+  ${media.mobile} {
+    ${touchOptimized}
+  }
 `;
 
 export const Link = styled.a`
@@ -19,6 +25,13 @@ export const Link = styled.a`
   &:hover {
     color: ${theme.colors.light};
   }
+  
+  /* 모바일: 폰트 크기와 터치 최적화 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.sm};
+    ${touchOptimized}
+    padding: ${theme.mobile.spacing.xs} 0;
+  }
 `;
 
 export const SkillTag = styled.span`
@@ -27,4 +40,11 @@ export const SkillTag = styled.span`
   border-radius: ${theme.layout.borderRadius};
   font-size: ${theme.fonts.sizes.xs};
   color: ${theme.colors.light};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.xs};
+    padding: ${theme.mobile.spacing.xs} ${theme.mobile.spacing.sm};
+    border-radius: ${theme.layout.borderRadiusLarge};
+  }
 `;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ProfileSection as StyledProfileSection } from '../layout/Section';
 import { theme } from '../../styles/theme';
+import { media, mobileCardStyles } from '../../styles/mixins';
 import type { ProfileData } from '../../types';
 
 const ProfileTitle = styled.div`
@@ -11,6 +12,12 @@ const ProfileTitle = styled.div`
   letter-spacing: 0.05em;
   color: ${theme.colors.primary};
   margin-bottom: ${theme.spacing.sm};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.xl};
+    margin-bottom: ${theme.mobile.spacing.md};
+  }
 `;
 
 const ProfileDescription = styled.div`
@@ -18,9 +25,14 @@ const ProfileDescription = styled.div`
   line-height: 1.6;
   color: ${theme.colors.secondary};
   margin-bottom: ${theme.spacing.lg};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.md};
+    line-height: 1.5;
+    margin-bottom: ${theme.mobile.spacing.xl};
+  }
 `;
-
-// Removed unused styled components to satisfy strict TS checks during CI
 
 const LinksTitle = styled.div`
   font-size: ${theme.fonts.sizes.sm};
@@ -30,6 +42,13 @@ const LinksTitle = styled.div`
   color: ${theme.colors.primary};
   margin-bottom: ${theme.spacing.sm};
   margin-top: ${theme.spacing.lg};
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.md};
+    margin-bottom: ${theme.mobile.spacing.md};
+    margin-top: ${theme.mobile.spacing.xl};
+  }
 `;
 
 // 기존 링크들 (작은 사이즈)
@@ -40,6 +59,15 @@ const SmallContactLink = styled.a`
   
   &:hover {
     color: ${theme.colors.primary};
+  }
+  
+  /* 모바일: 폰트 크기와 터치 최적화 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.sm};
+    padding: ${theme.mobile.spacing.xs} 0;
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
   }
 `;
 
@@ -53,6 +81,29 @@ const LargeLink = styled.a`
   &:hover {
     color: ${theme.colors.primary};
   }
+  
+  /* 모바일: 폰트 크기와 터치 최적화 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.lg};
+    padding: ${theme.mobile.spacing.sm} 0;
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
+  }
+`;
+
+const ContactSection = styled.div`
+  margin-top: ${theme.spacing.md};
+  
+  /* 모바일: 여백 조정 */
+  ${media.mobile} {
+    margin-top: ${theme.mobile.spacing.md};
+  }
+`;
+
+const ExternalLinksSection = styled.div`
+  /* 모바일: 카드 스타일 적용 */
+  ${mobileCardStyles}
 `;
 
 interface ProfileSectionProps {
@@ -79,7 +130,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
         </ProfileDescription>
         
         {/* 기존 링크들을 About 바로 밑에 */}
-        <div style={{ marginTop: theme.spacing.md }}>
+        <ContactSection>
           {/* 이메일들 */}
           {contact.emails.map((email, index) => (
             <React.Fragment key={index}>
@@ -103,14 +154,16 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({ data }) => {
               <SmallContactLink href={contact.x} target="_blank">X</SmallContactLink><br />
             </>
           )}
-        </div>
+        </ContactSection>
         
         <LinksTitle>EXTERNAL</LinksTitle>
         
         {/* 큰 링크들 */}
-        <LargeLink href="https://blog.example.com" target="_blank">Blog</LargeLink><br />
-        <LargeLink href="https://newsletter.example.com" target="_blank">Newsletter</LargeLink><br />
-        <LargeLink href="https://jaywoong-jeong.github.io/digital-garden/" target="_blank">Digital Garden</LargeLink><br />
+        <ExternalLinksSection>
+          <LargeLink href="https://blog.example.com" target="_blank">Blog</LargeLink><br />
+          <LargeLink href="https://newsletter.example.com" target="_blank">Newsletter</LargeLink><br />
+          <LargeLink href="https://jaywoong-jeong.github.io/digital-garden/" target="_blank">Digital Garden</LargeLink><br />
+        </ExternalLinksSection>
       </div>
     </StyledProfileSection>
   );

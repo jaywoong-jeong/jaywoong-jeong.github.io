@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
-import { textStyles } from '../../styles/mixins';
+import { textStyles, media } from '../../styles/mixins';
 
 export const Title = styled.div`
   font-size: ${theme.fonts.sizes.lg};
@@ -10,6 +10,11 @@ export const Title = styled.div`
   color: ${theme.colors.primary};
   margin-top: 0;
   text-align: left;
+  
+  /* 모바일: 폰트 크기 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.lg};
+  }
 `;
 
 export const SectionTitle = styled.h3`
@@ -33,12 +38,25 @@ export const SectionTitle = styled.h3`
     height: 1px;
     background-color: ${theme.colors.border};
   }
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.lg};
+    margin-bottom: ${theme.mobile.spacing.md};
+    padding-bottom: ${theme.mobile.spacing.sm};
+  }
 `;
 
 export const ItemTitle = styled.div`
   font-weight: ${theme.fonts.weights.semibold};
   margin-bottom: 0.3rem;
   color: ${theme.colors.primary};
+  
+  /* 모바일: 폰트 크기 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.md};
+    margin-bottom: ${theme.mobile.spacing.xs};
+  }
 `;
 
 export const ItemSubtitle = styled.div`
@@ -48,11 +66,22 @@ export const ItemSubtitle = styled.div`
   b, strong {
     font-weight: ${theme.fonts.weights.semibold};
   }
+  
+  /* 모바일: 폰트 크기와 여백 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.sm};
+    margin-bottom: ${theme.mobile.spacing.xs};
+  }
 `;
 
 export const ItemDate = styled.div`
   font-size: ${theme.fonts.sizes.xs};
   color: ${theme.colors.accent};
+  
+  /* 모바일: 폰트 크기 조정 */
+  ${media.mobile} {
+    font-size: ${theme.mobile.fonts.sizes.xs};
+  }
 `;
 
 export const ItemDetails = styled.div`

@@ -6,12 +6,16 @@ import { Column, ColumnContent, ColumnFooter } from './components/layout/Column'
 import { ProfileSection } from './components/content/ProfileSection';
 import { CVSectionComponent } from './components/content/CVSection';
 import { ContentRenderer } from './components/content/ContentRenderer';
+import MobileNavigation from './components/MobileNavigation';
 import { useMarkdownData } from './hooks/useMarkdownData';
 import { APP_CONFIG, type MenuType } from './constants/config';
 
 function App() {
-  const [activeMenu, setActiveMenu] = React.useState<MenuType>(APP_CONFIG.defaultMenu);
+  const [activeMenu, setActiveMenu] = React.useState<MenuType | 'cv'>(APP_CONFIG.defaultMenu);
   const { projects, publications, artwork, profile, loading, error } = useMarkdownData();
+
+  // CV 섹션을 표시할지 결정
+  const showCV = activeMenu === 'cv';
 
   return (
     <>
@@ -29,29 +33,40 @@ function App() {
 
         <Column>
           <Header 
-            title={activeMenu.charAt(0).toUpperCase() + activeMenu.slice(1)} 
-            showMenu={true} 
+            title={activeMenu === 'cv' ? 'CV' : activeMenu.charAt(0).toUpperCase() + activeMenu.slice(1)} 
+            showMenu={activeMenu !== 'cv'} 
             onMenuSelect={setActiveMenu}
           />
           <ColumnContent>
-            <ContentRenderer 
-              activeMenu={activeMenu}
-              projects={projects}
-              publications={publications}
-              artwork={artwork}
-              loading={loading}
-              error={error}
-            />
+            {activeMenu === 'cv' ? (
+              <CVSectionComponent />
+            ) : (
+              <ContentRenderer 
+                activeMenu={activeMenu as MenuType}
+                projects={projects}
+                publications={publications}
+                artwork={artwork}
+                loading={loading}
+                error={error}
+              />
+            )}
           </ColumnContent>
         </Column>
         
-        <Column>
+        {/* 데스크톱/태블릿에서만 별도 CV 컬럼 표시 */}
+        <Column className="cv-column">
           <Header title="CV" />
           <ColumnContent>
             <CVSectionComponent />
           </ColumnContent>
         </Column>
       </AppContainer>
+      
+      {/* 모바일 하단 네비게이션 */}
+      <MobileNavigation 
+        activeMenu={activeMenu}
+        onMenuSelect={setActiveMenu}
+      />
     </>
   );
 }
