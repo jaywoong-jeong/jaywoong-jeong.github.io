@@ -27,6 +27,10 @@ type WorkExperience = {
   link: string
   id: string
   details?: string[]
+  advisor?: {
+    name: string
+    link?: string
+  }
 }
 
 type BlogPost = {
@@ -39,6 +43,17 @@ type BlogPost = {
 type SocialLink = {
   label: string
   link: string
+}
+
+type Advisor = {
+  name: string
+  affiliation: string
+  role: 'Advisor' | 'Co-advisor' | 'Mentor'
+  start?: string
+  end?: string
+  link?: string
+  id: string
+  details?: string[]
 }
 
 // Research/Publications
@@ -183,12 +198,28 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
+    company: 'KAIST School of Computing - Collaborative Social Technologies Lab',
+    title: 'Research Intern',
+    start: 'Jun 2025',
+    end: 'Aug 2025',
+    link: 'https://cstlab.org/',
+    id: 'work-kaist-cstl-2025',
+    advisor: {
+      name: 'Joseph Seering',
+      link: 'https://joseph.seering.org/index.html',
+    },
+  },
+  {
     company: 'KAIST Department of Industrial Design - AI Experience Lab',
     title: 'Research Intern',
     start: 'Aug 2024',
     end: 'Present',
     link: 'https://ai-experience-lab.github.io/',
     id: 'work-kaist-aix-2024',
+    advisor: {
+      name: 'Tak Yeon Lee',
+      link: 'https://takyeonlee.com/',
+    },
   },
   {
     company: 'KAIST Department of Industrial and Systems Engineering - Applied AI Lab',
@@ -197,6 +228,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Aug 2024',
     link: 'https://aai.kaist.ac.kr/',
     id: 'work-kaist-ise-applied-ai-2024',
+    advisor: {
+      name: 'Il-Chul Moon',
+      link: 'https://aai.kaist.ac.kr/bbs/board.php?bo_table=sub2_1&wr_id=3',
+    },
   },
   {
     company: 'MIT Sloan School of Management - Chu Lab',
@@ -205,6 +240,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Present',
     link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
     id: 'work-mit-chu-2024',
+    advisor: {
+      name: 'Johan Chu',
+      link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
+    },
   },
   {
     company: 'Company K Partners',
@@ -221,6 +260,27 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Dec 2022',
     link: 'https://www.hiconsy.com/',
     id: 'work-hiconsy-2022',
+  },
+]
+
+export const ADVISORS: Advisor[] = [
+  {
+    name: 'Joseph Seering',
+    affiliation: 'KAIST School of Computing - Collaborative Social Technologies Lab (CSTL)',
+    role: 'Advisor',
+    start: 'Jun 2025',
+    end: 'Aug 2025',
+    link: 'https://joseph.seering.org/index.html',
+    id: 'advisor-joseph-seering',
+  },
+  {
+    name: 'Il-Chul Moon',
+    affiliation: 'KAIST Department of Industrial and Systems Engineering - Applied AI Lab',
+    role: 'Advisor',
+    start: 'Jun 2024',
+    end: 'Aug 2024',
+    link: 'https://aai.kaist.ac.kr/bbs/board.php?bo_table=sub2_1&wr_id=3',
+    id: 'advisor-il-chul-moon',
   },
 ]
 
