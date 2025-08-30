@@ -31,6 +31,10 @@ type WorkExperience = {
     name: string
     link?: string
   }
+  mentors?: {
+    name: string
+    link?: string
+  }[]
 }
 
 type BlogPost = {
@@ -208,6 +212,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       name: 'Joseph Seering',
       link: 'https://joseph.seering.org/index.html',
     },
+    mentors: [
+      { name: 'Heechan Lee', link: 'https://heechanlee.com/' },
+    ],
   },
   {
     company: 'KAIST Department of Industrial Design - AI Experience Lab',
@@ -220,6 +227,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       name: 'Tak Yeon Lee',
       link: 'https://takyeonlee.com/',
     },
+    mentors: [
+      { name: 'Jae Young Choi', link: 'https://jaeyoungchoi1.github.io/' },
+      { name: 'Seon Gyeom Kim', link: 'https://kimseongyeom.github.io/' },
+    ],
   },
   {
     company: 'KAIST Department of Industrial and Systems Engineering - Applied AI Lab',

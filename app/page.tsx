@@ -375,22 +375,51 @@ export default function Personal() {
                     <p className="text-zinc-500 dark:text-zinc-400">
                       {job.company}
                     </p>
-                    {job.advisor && (
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                        Advisor:{' '}
-                        {job.advisor.link ? (
-                          <a
-                            href={job.advisor.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                          >
-                            {job.advisor.name}
-                          </a>
-                        ) : (
-                          job.advisor.name
+                    {(job.advisor || (job.mentors && job.mentors.length > 0)) && (
+                      <div className="text-sm text-zinc-600 dark:text-zinc-400 space-y-1 sm:space-y-0 sm:flex sm:items-center sm:gap-2 sm:whitespace-nowrap">
+                        {job.advisor && (
+                          <span className="block sm:inline">
+                            Advisor:{' '}
+                            {job.advisor.link ? (
+                              <a
+                                href={job.advisor.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                              >
+                                {job.advisor.name}
+                              </a>
+                            ) : (
+                              job.advisor.name
+                            )}
+                          </span>
                         )}
-                      </p>
+                        {job.advisor && job.mentors && job.mentors.length > 0 && (
+                          <span className="hidden sm:inline"> | </span>
+                        )}
+                        {job.mentors && job.mentors.length > 0 && (
+                          <span className="block sm:inline">
+                            Mentor{job.mentors.length > 1 ? 's' : ''}:{' '}
+                            {job.mentors.map((m, idx) => (
+                              <span key={`${job.id}-mentor-${idx}`}>
+                                {m.link ? (
+                                  <a
+                                    href={m.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                                  >
+                                    {m.name}
+                                  </a>
+                                ) : (
+                                  m.name
+                                )}
+                                {idx < job.mentors!.length - 1 ? ', ' : ''}
+                              </span>
+                            ))}
+                          </span>
+                        )}
+                      </div>
                     )}
                   </div>
                   <p className="whitespace-nowrap text-zinc-600 dark:text-zinc-400 sm:text-right">
