@@ -16,7 +16,9 @@ import {
 const LINKS = {
   kaist: 'https://www.kaist.ac.kr/en/',
   aix: 'https://ai-experience-lab.github.io/',
+  cstl: 'https://cstlab.org/',
   takyeon: 'https://takyeonlee.com/',
+  seering: 'https://joseph.seering.org/index.html',
   johan: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
   mitSloan: 'https://mitsloan.mit.edu/',
   vc: 'https://en.wikipedia.org/wiki/Venture_capital',
@@ -355,11 +357,8 @@ export default function Personal() {
         <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
-            <a
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
+              className="group/card relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
               key={job.id}
             >
               <Spotlight
@@ -367,6 +366,13 @@ export default function Personal() {
                 size={64}
               />
               <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <a
+                  href={job.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${job.company}`}
+                  className="absolute inset-0 z-10"
+                />
                 <div className="relative flex w-full flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <h4 className="font-normal dark:text-zinc-100">
@@ -385,12 +391,12 @@ export default function Personal() {
                                 href={job.advisor.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                                className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
                               >
-                                {job.advisor.name}
+                                {`Prof. ${job.advisor.name}`}
                               </a>
                             ) : (
-                              job.advisor.name
+                              `Prof. ${job.advisor.name}`
                             )}
                           </span>
                         )}
@@ -407,7 +413,7 @@ export default function Personal() {
                                     href={m.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                                    className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
                                   >
                                     {m.name}
                                   </a>
@@ -434,7 +440,7 @@ export default function Personal() {
                   </ul>
                 )}
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </motion.section>

@@ -202,21 +202,6 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'KAIST School of Computing - Collaborative Social Technologies Lab',
-    title: 'Research Intern',
-    start: 'Jun 2025',
-    end: 'Aug 2025',
-    link: 'https://cstlab.org/',
-    id: 'work-kaist-cstl-2025',
-    advisor: {
-      name: 'Joseph Seering',
-      link: 'https://joseph.seering.org/index.html',
-    },
-    mentors: [
-      { name: 'Heechan Lee', link: 'https://heechanlee.com/' },
-    ],
-  },
-  {
     company: 'KAIST Department of Industrial Design - AI Experience Lab',
     title: 'Research Intern',
     start: 'Aug 2024',
@@ -230,6 +215,21 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     mentors: [
       { name: 'Jae Young Choi', link: 'https://jaeyoungchoi1.github.io/' },
       { name: 'Seon Gyeom Kim', link: 'https://kimseongyeom.github.io/' },
+    ],
+  },
+  {
+    company: 'KAIST School of Computing - Collaborative Social Technologies Lab',
+    title: 'Research Intern',
+    start: 'Jun 2025',
+    end: 'Aug 2025',
+    link: 'https://cstlab.org/',
+    id: 'work-kaist-cstl-2025',
+    advisor: {
+      name: 'Joseph Seering',
+      link: 'https://joseph.seering.org/index.html',
+    },
+    mentors: [
+      { name: 'Heechan Lee', link: 'https://heechanlee.com/' },
     ],
   },
   {
