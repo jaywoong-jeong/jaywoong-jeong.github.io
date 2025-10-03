@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
+import ThemeEnforcer from '@/components/ThemeEnforcer'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -85,26 +86,21 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
-        <ThemeProvider
-          attribute="class"
-          storageKey="theme"
-          defaultTheme="light"
-          enableSystem={false}
-          forcedTheme="light"
-        >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
-              <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
-                <aside className="lg:sticky lg:top-20 self-start">
-                  <Header />
-                </aside>
-                <div>
-                  {children}
-                  <Footer />
+        <ThemeProvider attribute="class" storageKey="theme" defaultTheme="light" enableSystem={false}>
+          <ThemeEnforcer />
+            <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
+              <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
+                <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
+                  <aside className="lg:sticky lg:top-20 self-start">
+                    <Header />
+                  </aside>
+                  <div>
+                    {children}
+                    <Footer />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Analytics />

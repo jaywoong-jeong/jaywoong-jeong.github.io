@@ -3,25 +3,29 @@ import { TextEffect } from '@/components/ui/text-effect'
 import Link from 'next/link'
 import Image from 'next/image'
 import { SOCIAL_LINKS, EMAIL } from './data'
+import { usePathname } from 'next/navigation'
 
 export function Header() {
+  const pathname = usePathname()
+  const isArtist = pathname?.startsWith('/artist')
   return (
     <header className="mb-8 flex flex-col gap-3 sm:gap-4">
       <div>
         <Link href="/" className="font-medium text-black dark:text-white text-xl sm:text-2xl">
           <span className="inline-flex items-center gap-2">
-            <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} />
+            <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} className="dark:invert" />
             <span>Jaywoong Jeong</span>
           </span>
         </Link>
         <TextEffect
+          key={isArtist ? 'artist-subtitle' : 'home-subtitle'}
           as="p"
           preset="fade"
           per="char"
           className="break-words whitespace-normal text-sm text-zinc-600 dark:text-zinc-500 sm:text-base"
           delay={0.5}
         >
-          Math & Design @ KAIST
+          {isArtist ? 'Amateur Writer, Actor, and Stand-Up Comedian' : 'Math & Design @ KAIST'}
         </TextEffect>
         <a
           href={`mailto:${EMAIL}`}
@@ -61,24 +65,43 @@ export function Header() {
       </div>
       
       <nav aria-label="Primary" className="text-sm">
-        <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
-          <li>
-            <Link href="/#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Research
-            </Link>
-          </li>
-          <li>
-            <Link href="/#projects" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              Work
-            </Link>
-          </li>
-          
-        </ul>
+        {isArtist ? (
+          <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
+            <li>
+              <Link href="/artist#theatre" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Theatre
+              </Link>
+            </li>
+            <li>
+              <Link href="/artist#comedy" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Comedy
+              </Link>
+            </li>
+            <li>
+              <Link href="/artist#critique" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Media Critique
+              </Link>
+            </li>
+          </ul>
+        ) : (
+          <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
+            <li>
+              <Link href="/#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Research
+              </Link>
+            </li>
+            <li>
+              <Link href="/#projects" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Work
+              </Link>
+            </li>
+          </ul>
+        )}
       </nav>
     </header>
   )

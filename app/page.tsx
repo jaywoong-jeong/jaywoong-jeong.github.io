@@ -12,6 +12,16 @@ import {
   SOCIAL_LINKS,
   PUBLICATIONS,
 } from './data'
+import {
+  MorphingDialog,
+  MorphingDialogTrigger,
+  MorphingDialogContainer,
+  MorphingDialogContent,
+  MorphingDialogClose,
+  MorphingDialogTitle,
+  MorphingDialogSubtitle,
+  MorphingDialogDescription,
+} from '@/components/ui/morphing-dialog'
 
 const LINKS = {
   kaist: 'https://www.kaist.ac.kr/en/',
@@ -198,7 +208,7 @@ export default function Personal() {
             >
               MIT Sloan
             </a>
-            . My research focuses on AI creativity augmentation tools and their societal impact from Computational Social Science and HCI perspectives. My background in{' '}
+          . My research focuses on AI creativity augmentation tools and their societal impact from Computational Social Science and HCI perspectives. My background in{' '}
             <a
               href={LINKS.companyK}
               target="_blank"
@@ -207,7 +217,14 @@ export default function Personal() {
             >
               venture capital
             </a>{' '}
-            and experience across strategy, product development, and marketing give me both technical and business perspectives for building impactful products.
+          and experience across strategy, product development, and marketing give me both technical and business perspectives for building impactful products.
+          {' '}Apart from study and research, I pursue theater, stand-up comedy, and design as personal interests.{' '}
+          <a
+            href="/artist"
+            className="text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+          >
+            View the artist page
+          </a>.
           </p>
         </div>
       </motion.section>
@@ -221,45 +238,65 @@ export default function Personal() {
         <ul className="space-y-4">
           {PUBLICATIONS.map((pub) => (
             <li key={pub.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
-              <div className="flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
-                {pub.image && (
-                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
-                    <Image src={pub.image} alt={pub.imageAlt || pub.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 200px" />
-                  </div>
-                )}
-                <div className="mt-2 flex min-w-0 flex-col gap-1 sm:mt-0">
-                  <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{pub.title}</h4>
-                  <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                    {pub.authors.map((author, idx) => (
-                      <span key={`${pub.id}-author-${idx}`}>
-                        <span className={author === 'Jaywoong Jeong' ? 'font-semibold text-zinc-900 dark:text-zinc-100' : undefined}>
-                          {author}
-                        </span>
-                        {idx < pub.authors.length - 1 ? ', ' : ''}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">{pub.status ?? `${pub.venue}, ${pub.year}`}</p>
-                  {pub.description && (
-                    <p className="mt-2 text-sm text-zinc-600 break-words hyphens-auto dark:text-zinc-400">{pub.description}</p>
-                  )}
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    {pub.tags?.map((tag) => (
-                      <span key={tag} className="rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{tag}</span>
-                    ))}
-                    {pub.link && (
-                      <a
-                        href={pub.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-0 mt-2 inline-block basis-full text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100 sm:ml-auto sm:mt-0 sm:basis-auto"
-                      >
-                        Paper
-                      </a>
+              <MorphingDialog>
+                <MorphingDialogTrigger>
+                  <div className="flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
+                    {pub.image && (
+                      <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
+                        <Image src={pub.image} alt={pub.imageAlt || pub.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 200px" />
+                      </div>
                     )}
+                    <div className="mt-2 flex min-w-0 flex-col gap-1 sm:mt-0">
+                      <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{pub.title}</h4>
+                      <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                        {pub.authors.map((author, idx) => (
+                          <span key={`${pub.id}-author-${idx}`}>
+                            <span className={author === 'Jaywoong Jeong' ? 'font-semibold text-zinc-900 dark:text-zinc-100' : undefined}>
+                              {author}
+                            </span>
+                            {idx < pub.authors.length - 1 ? ', ' : ''}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{pub.status ?? `${pub.venue}, ${pub.year}`}</p>
+                      {pub.description && (
+                        <p className="mt-2 text-sm text-zinc-600 break-words hyphens-auto dark:text-zinc-400">{pub.description}</p>
+                      )}
+                      <div className="mt-2 flex flex-wrap items-center gap-2">
+                        {pub.tags?.map((tag) => (
+                          <span key={tag} className="rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </MorphingDialogTrigger>
+                <MorphingDialogContainer>
+                  <MorphingDialogContent className="w-[min(92vw,800px)] overflow-hidden rounded-2xl bg-white p-0 dark:bg-zinc-950">
+                    <div className="relative p-6">
+                      <MorphingDialogTitle className="text-xl font-medium text-zinc-900 dark:text-zinc-100">{pub.title}</MorphingDialogTitle>
+                      <MorphingDialogSubtitle className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                        {(pub.authors || []).join(', ')} • {pub.status ?? `${pub.venue}, ${pub.year}`}
+                      </MorphingDialogSubtitle>
+                      {pub.description && (
+                        <MorphingDialogDescription className="mt-4 text-sm text-zinc-700 dark:text-zinc-300">
+                          {pub.description}
+                        </MorphingDialogDescription>
+                      )}
+                      {pub.link && (
+                        <a
+                          href={pub.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-block text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                        >
+                          Read the paper
+                        </a>
+                      )}
+                      <MorphingDialogClose className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100" />
+                    </div>
+                  </MorphingDialogContent>
+                </MorphingDialogContainer>
+              </MorphingDialog>
             </li>
           ))}
         </ul>
