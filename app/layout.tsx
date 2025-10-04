@@ -6,6 +6,7 @@ import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import ThemeEnforcer from '@/components/ThemeEnforcer'
+import { cookies } from 'next/headers'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -62,11 +63,14 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = await cookies()
+  const themeCookie = cookieStore.get('theme')?.value
+  const isDark = themeCookie === 'dark'
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -84,9 +88,9 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} ${isDark ? 'dark' : ''} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
-        <ThemeProvider attribute="class" storageKey="theme" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" storageKey="theme" defaultTheme={isDark ? 'dark' : 'light'} enableSystem={false}>
           <ThemeEnforcer />
             <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
               <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
