@@ -10,6 +10,9 @@ export default function ThemeEnforcer() {
   useEffect(() => {
     const desired = isArtist ? 'dark' : 'light'
     if (theme !== desired) setTheme(desired)
+    // Ensure no stale theme classes remain on body
+    document.body.classList.remove('dark')
+    document.body.classList.remove('light')
   }, [pathname, isArtist, theme, setTheme])
   return null
 }

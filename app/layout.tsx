@@ -86,9 +86,9 @@ export default async function RootLayout({
     ]
   };
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning className={isDark ? 'dark' : ''}>
       <body
-        className={`${geist.variable} ${geistMono.variable} ${isDark ? 'dark' : ''} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
         <ThemeProvider attribute="class" storageKey="theme" defaultTheme={isDark ? 'dark' : 'light'} enableSystem={false}>
           <ThemeEnforcer />
