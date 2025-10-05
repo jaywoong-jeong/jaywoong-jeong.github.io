@@ -1,0 +1,22 @@
+# Durable Dominance in the Korean Film Industry
+
+ 
+
+## Research Questions
+
+We study how to operationalize “experience” in a way that goes beyond tenure. In particular, we combine multiple signals such as the number of projects credited, the prominence of roles (lead vs. support), and coarse project success indicators. We then ask how the experience mix between newcomers and veterans evolves through time for both actors and staff. Finally, we examine how exogenous shocks (e.g., Netflix’s entry around 2016–2017 and later events like COVID‑19) may shift hiring/crediting patterns and reinforce or weaken durable dominance among incumbents.
+
+## Dataset Composition
+
+Our dataset integrates films and dramas to cover the Korean screen industry at scale. For movies, we crawl KMDB, saving both title‑level metadata and person‑level filmography pages; we parse HTML to CSV/TSV and reconcile unlinked names when possible. The current movie subset contains 27,951 films and person records totaling 223,315 entries (72,300 confirmed and 35,377 uncertain individuals). For TV dramas, we aggregate public listings from Kinolights, Korean Wikipedia, and Namuwiki, cross‑checking entries and contacting the actors’ union to improve coverage and disambiguation. We maintain separate schemas for works (release year, type, success proxies), credits (role type, position in billing), and people (debut year, cumulative experience), enabling longitudinal analyses across both actors and staff.
+
+## Findings (Preliminary)
+
+The experience composition shows a notable turning point around 2017. Among actors, the share of newcomers (0–5 years since debut) grows after 2011 but falls substantially after 2017. Among staff, newcomer share declines steadily while incumbents continue to accumulate credits, consistent with durable dominance. These patterns plausibly relate to Netflix’s 2016H2 entry, though later spikes in 2019 and 2022 suggest additional forces (including COVID‑19 disruptions) that we plan to model explicitly.
+
+## Future Plan
+
+We will develop role‑ and impact‑aware experience indices that weight lead vs. support credits and incorporate project‑level success proxies. We plan to expand drama coverage and cross‑validate person identities with union records and public datasets, releasing a composite index and reproducible code. Finally, we will compare Netflix and non‑Netflix hiring/crediting patterns by experience profile to test whether platform dynamics systematically favor incumbents.
+
+
+
