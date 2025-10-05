@@ -230,6 +230,101 @@ export default function Personal() {
       </motion.section>
 
       
+      <motion.section
+        id="work"
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Work Experience</h3>
+        <div className="flex flex-col space-y-2">
+          {WORK_EXPERIENCE.map((job) => (
+            <div
+              className="group/card relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+              key={job.id}
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <a
+                  href={job.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${job.company}`}
+                  className="absolute inset-0 z-10"
+                />
+                <div className="relative flex w-full flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h4 className="font-normal dark:text-zinc-100">
+                      {job.title}
+                    </h4>
+                    <p className="text-zinc-500 dark:text-zinc-400">
+                      {job.company}
+                    </p>
+                    {(job.advisor || (job.mentors && job.mentors.length > 0)) && (
+                      <div className="text-sm text-zinc-600 dark:text-zinc-400 space-y-1 sm:space-y-0 sm:flex sm:items-center sm:gap-2 sm:whitespace-nowrap">
+                        {job.advisor && (
+                          <span className="block sm:inline">
+                            Advisor:{' '}
+                            {job.advisor.link ? (
+                              <a
+                                href={job.advisor.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                              >
+                                {`Prof. ${job.advisor.name}`}
+                              </a>
+                            ) : (
+                              `Prof. ${job.advisor.name}`
+                            )}
+                          </span>
+                        )}
+                        {job.advisor && job.mentors && job.mentors.length > 0 && (
+                          <span className="hidden sm:inline"> | </span>
+                        )}
+                        {job.mentors && job.mentors.length > 0 && (
+                          <span className="block sm:inline">
+                            Mentor{job.mentors.length > 1 ? 's' : ''}:{' '}
+                            {job.mentors.map((m, idx) => (
+                              <span key={`${job.id}-mentor-${idx}`}>
+                                {m.link ? (
+                                  <a
+                                    href={m.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                                  >
+                                    {m.name}
+                                  </a>
+                                ) : (
+                                  m.name
+                                )}
+                                {idx < job.mentors!.length - 1 ? ', ' : ''}
+                              </span>
+                            ))}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <p className="whitespace-nowrap text-zinc-600 dark:text-zinc-400 sm:text-right">
+                    {job.start} - {job.end}
+                  </p>
+                </div>
+                {job.details && job.details.length > 0 && (
+                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-400">
+                    {job.details.map((detail, index) => (
+                      <li key={index}>{detail}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
 
       <motion.section
         id="research"
@@ -364,101 +459,7 @@ export default function Personal() {
       </motion.section>
 
       
-      <motion.section
-        id="work"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map((job) => (
-            <div
-              className="group/card relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              key={job.id}
-            >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <a
-                  href={job.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${job.company}`}
-                  className="absolute inset-0 z-10"
-                />
-                <div className="relative flex w-full flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h4 className="font-normal dark:text-zinc-100">
-                      {job.title}
-                    </h4>
-                    <p className="text-zinc-500 dark:text-zinc-400">
-                      {job.company}
-                    </p>
-                    {(job.advisor || (job.mentors && job.mentors.length > 0)) && (
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400 space-y-1 sm:space-y-0 sm:flex sm:items-center sm:gap-2 sm:whitespace-nowrap">
-                        {job.advisor && (
-                          <span className="block sm:inline">
-                            Advisor:{' '}
-                            {job.advisor.link ? (
-                              <a
-                                href={job.advisor.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                              >
-                                {`Prof. ${job.advisor.name}`}
-                              </a>
-                            ) : (
-                              `Prof. ${job.advisor.name}`
-                            )}
-                          </span>
-                        )}
-                        {job.advisor && job.mentors && job.mentors.length > 0 && (
-                          <span className="hidden sm:inline"> | </span>
-                        )}
-                        {job.mentors && job.mentors.length > 0 && (
-                          <span className="block sm:inline">
-                            Mentor{job.mentors.length > 1 ? 's' : ''}:{' '}
-                            {job.mentors.map((m, idx) => (
-                              <span key={`${job.id}-mentor-${idx}`}>
-                                {m.link ? (
-                                  <a
-                                    href={m.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                                  >
-                                    {m.name}
-                                  </a>
-                                ) : (
-                                  m.name
-                                )}
-                                {idx < job.mentors!.length - 1 ? ', ' : ''}
-                              </span>
-                            ))}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  <p className="whitespace-nowrap text-zinc-600 dark:text-zinc-400 sm:text-right">
-                    {job.start} - {job.end}
-                  </p>
-                </div>
-                {job.details && job.details.length > 0 && (
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-400">
-                    {job.details.map((detail, index) => (
-                      <li key={index}>{detail}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section>
+      
 
       <motion.section
         id="publications"

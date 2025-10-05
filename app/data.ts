@@ -44,6 +44,21 @@ type BlogPost = {
   uid: string
 }
 
+// Research (MDX-based) minimal metadata
+export type ResearchItem = {
+  id: string
+  title: string
+  status?: 'Ongoing' | 'Completed'
+  link: string // route to the MDX page
+  period?: string
+  affiliation?: string
+  collaborators?: string[]
+  summary?: string
+  topics?: string[]
+  image?: string
+  programTag?: string
+}
+
 type SocialLink = {
   label: string
   link: string
@@ -202,10 +217,22 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
+    company: 'MIT Sloan School of Management - Chu Lab',
+    title: 'Research Assistant',
+    start: 'Mar 2024',
+    end: 'Present',
+    link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
+    id: 'work-mit-chu-2024',
+    advisor: {
+      name: 'Johan Chu',
+      link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
+    },
+  },
+  {
     company: 'KAIST Department of Industrial Design - AI Experience Lab',
     title: 'Research Intern',
     start: 'Aug 2024',
-    end: 'Sep 2025',
+    end: 'Present',
     link: 'https://ai-experience-lab.github.io/',
     id: 'work-kaist-aix-2024',
     advisor: {
@@ -218,6 +245,21 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     ],
   },
   {
+    company: 'KAIST School of Computing - Collaborative Social Technologies Lab (CSTL)',
+    title: 'Research Intern',
+    start: 'Jun 2025',
+    end: 'Aug 2025',
+    link: 'https://cstlab.org/',
+    id: 'work-kaist-cstl-2025',
+    advisor: {
+      name: 'Joseph Seering',
+      link: 'https://joseph.seering.org/index.html',
+    },
+    mentors: [
+      { name: 'Heechan Lee', link: 'https://heechanlee.com/' },
+    ],
+  },
+  {
     company: 'KAIST Department of Industrial and Systems Engineering - Applied AI Lab',
     title: 'Research Intern',
     start: 'Jun 2024',
@@ -227,18 +269,6 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     advisor: {
       name: 'Il-Chul Moon',
       link: 'https://aai.kaist.ac.kr/bbs/board.php?bo_table=sub2_1&wr_id=3',
-    },
-  },
-  {
-    company: 'MIT Sloan School of Management - Chu Lab',
-    title: 'Research Assistant',
-    start: 'Mar 2024',
-    end: 'Present',
-    link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
-    id: 'work-mit-chu-2024',
-    advisor: {
-      name: 'Johan Chu',
-      link: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
     },
   },
   {
@@ -329,9 +359,9 @@ export const PUBLICATIONS: Publication[] = [
       'Jihyung Kil',
       'Tak Yeon Lee',
     ],
-    venue: 'UbiComp Companion (To Appear)',
+    venue: 'UbiComp',
     year: '2025',
-    status: 'UbiComp Companion (To Appear), 2025',
+    status: 'UbiComp, 2025',
     description:
       'Proposes a method for converting eye-tracking signals into visual prompts to enhance multimodal LLM performance, enabling attention-aware interaction and analysis.',
     link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
@@ -348,7 +378,7 @@ export const PUBLICATIONS: Publication[] = [
     year: '2025',
     status: 'Under Review, 2025',
     description:
-      "DramaForge is a system that uses LLMs to analyze theatrical scripts' structural dependencies and propose targeted adaptation options that meet user constraints while supporting collaborative workflows and maintaining human creative control.",
+      "DramaForge is a system that uses LLMs to analyze theatrical scripts' structural dependencies and propose targeted adaptation options that meet user constraints while supporting collaborative workflows and maintaining human creative control. We are currently conducting an in-lab user study to evaluate UX and workflow impacts.",
     link: '/publications/DramaForge_UnderReview.pdf',
     id: 'pub-dramaforge-2025',
     tags: ['LLM', 'Creativity Support', 'HCI'],
@@ -369,3 +399,46 @@ export const PUBLICATIONS: Publication[] = [
 ]
 
 export const EMAIL = 'jaywoong.jeong@kaist.ac.kr'
+
+// Research items (content lives in /app/research/*/page.mdx)
+export const RESEARCH_ITEMS: ResearchItem[] = [
+  {
+    id: 'research-dramaforge',
+    title: 'DramaForge: LLM-based Screenplay Analysis and Adaptation System',
+    link: '/research/dramaforge',
+    period: 'Jan 2025 – Present',
+    affiliation: 'AI Experience Lab (KAIST Industiral Design)',
+    collaborators: ['Prof. Tak Yeon Lee'],
+    summary:
+      'LLM-based system for analyzing and adapting theatrical scripts under practical constraints; transforms text into structured data and generates constraint-aware adaptation options.',
+    topics: ['LLM', 'Theatrcial Language Processing', 'Human-AI-Interaction'],
+    image: '/research/dramaforge/DramaForge Cover.png',
+    programTag: '2025 Spring URP',
+  },
+  {
+    id: 'research-cstl-project',
+    title: 'Collaborative Conversation: Building a Long-term Group Collaboration Dataset for Training and Evaluating AI Agents',
+    link: '/research/cstl-project',
+    period: '2025 – Present',
+    affiliation: 'CSTL (KAIST School of Computing)',
+    collaborators: ['Heechan Lee'],
+    summary:
+      'Building a long-term, multi-party collaboration dataset to study emergent roles, collaboration quality, and long-horizon memory with integrated surveys and artifacts.',
+    topics: ['Group Collaboration', 'Dataset', 'Emergent Roles', 'LLM Annotation'],
+    image: '/research/cstl-project/c2 cover.png',
+    programTag: '2025 Summer',
+  },
+  {
+    id: 'research-sloan-project',
+    title: 'Durable Dominance in the Korean Film Industry',
+    link: '/research/sloan-project',
+    period: '2024 – Present',
+    affiliation: 'MIT Sloan School of Management',
+    collaborators: ['Ella Chen', 'Prof. Johan Chu'],
+    summary:
+      'Investigating durable dominance post-Netflix by tracking actors and staff careers across Korean cinema and TV; examining newcomers vs. veterans and industry shocks.',
+    topics: ['Durable Dominance', 'Film Industry', 'Careers', 'Netflix'],
+    image: '/research/sloan-project/durable-dominance.png',
+    programTag: '2024 Summer',
+  },
+]
