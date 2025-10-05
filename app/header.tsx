@@ -86,6 +86,11 @@ export function Header() {
         ) : (
           <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
             <li>
+              <Link href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Work
+              </Link>
+            </li>
+            <li>
               <Link href="/#research" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
                 Research
               </Link>
@@ -96,8 +101,8 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/#work" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-                Work
+              <Link href="/#publications" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Publications
               </Link>
             </li>
           </ul>
