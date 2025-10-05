@@ -18,9 +18,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       className?: string
       imgClassName?: string
     }) => {
+      const figureClass = ['w-full', className].filter(Boolean).join(' ')
+      const imageClass = imgClassName ?? 'w-full h-auto rounded-xl'
       return (
-        <figure className={className}>
-          <img src={src} alt={alt} className={imgClassName ?? 'rounded-xl'} />
+        <figure className={figureClass}>
+          <img
+            src={src}
+            alt={alt}
+            className={imageClass}
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 640px) 100vw, 800px"
+          />
           {caption ? (
             <figcaption className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
               {caption}
@@ -39,8 +48,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       caption: string
     }) => {
       return (
-        <figure>
-          <img src={src} alt={alt} className="rounded-xl" />
+        <figure className="w-full">
+          <img
+            src={src}
+            alt={alt}
+            className="w-full h-auto rounded-xl"
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 640px) 100vw, 800px"
+          />
           <figcaption className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
         </figure>
       )
