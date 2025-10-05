@@ -336,10 +336,10 @@ export default function Personal() {
           {RESEARCH_ITEMS.map((item) => (
             <li key={item.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
               <Link href={item.link} className="block rounded-xl p-3">
-                <div className="flex items-stretch gap-3">
-                  <div className="relative hidden h-24 w-40 shrink-0 overflow-hidden rounded-md ring-1 ring-zinc-200/60 sm:block dark:ring-zinc-800/60">
+                <div className="relative flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
+                  <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 sm:h-24 sm:w-40 dark:ring-zinc-800/60">
                     {item.image ? (
-                      <Image src={item.image} alt={item.title} fill className="object-contain" sizes="160px" />
+                      <Image src={item.image} alt={item.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 160px" />
                     ) : (
                       <div className="absolute inset-0 grid place-items-center text-xs text-zinc-500 dark:text-zinc-400">No Image</div>
                     )}
@@ -347,8 +347,10 @@ export default function Personal() {
                   <div className="min-w-0 flex-1">
                     <h4 className="line-clamp-2 text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{item.title}</h4>
                     {(item.affiliation || item.programTag) && (
-                      <div className="mt-0.5 flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                        {item.affiliation && <span className="truncate">{item.affiliation}</span>}
+                      <div className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+                        {item.affiliation && (
+                          <span className="break-words whitespace-normal">{item.affiliation}</span>
+                        )}
                         {item.programTag && (
                           <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">{item.programTag}</span>
                         )}
