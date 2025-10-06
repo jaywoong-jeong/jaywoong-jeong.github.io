@@ -3,14 +3,16 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const response = NextResponse.next()
+  const isArtist = pathname.startsWith('/artist')
+  const theme = isArtist ? 'dark' : 'light'
 
-  // Force theme by route: dark for /artist, light otherwise
-  if (pathname.startsWith('/artist')) {
-    response.cookies.set('theme', 'dark', { path: '/' })
-  } else {
-    response.cookies.set('theme', 'light', { path: '/' })
-  }
+  // Forward theme to the SSR request so server components can read it immediately
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-theme', theme)
+  const response = NextResponse.next({ request: { headers: requestHeaders } })
+
+  // Also set a cookie for client navigations and persistence
+  response.cookies.set('theme', theme, { path: '/' })
 
   return response
 }

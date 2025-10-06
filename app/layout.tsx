@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import RouteTheme from '@/components/RouteTheme'
 
 export const viewport: Viewport = {
@@ -69,9 +69,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const hdrs = await headers()
+  const headerTheme = hdrs.get('x-theme')
   const cookieStore = await cookies()
   const themeCookie = cookieStore.get('theme')?.value
-  const isDark = themeCookie === 'dark'
+  const currentTheme = headerTheme || themeCookie || 'light'
+  const isDark = currentTheme === 'dark'
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
