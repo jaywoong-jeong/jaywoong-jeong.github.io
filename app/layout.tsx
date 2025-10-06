@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
-import ThemeEnforcer from '@/components/ThemeEnforcer'
 import { cookies } from 'next/headers'
+import RouteTheme from '@/components/RouteTheme'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -17,13 +17,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://jaywoong.me/'),
   alternates: {
-    canonical: '/'
+    canonical: '/',
   },
   title: {
     default: 'Jaywoong Jeong',
-    template: '%s | Jaywoong Jeong'
+    template: '%s | Jaywoong Jeong',
   },
-  description:  '정재웅(Jaywoong Jeong) — KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오. 프로젝트, 연구, 전략, 제품 작업을 소개합니다.',
+  description:
+    '정재웅(Jaywoong Jeong) — KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오. 프로젝트, 연구, 전략, 제품 작업을 소개합니다.',
   keywords: [
     '정재웅',
     'Jaywoong Jeong',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     'Human-Computer Interaction',
     '디자인',
     'AI',
-    '포트폴리오'
+    '포트폴리오',
   ],
   openGraph: {
     title: 'Jaywoong Jeong',
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     url: 'https://jaywoong.me/',
     siteName: 'Jaywoong Jeong',
     locale: 'ko_KR',
-    type: 'website'
+    type: 'website',
   },
   authors: [{ name: 'Jaywoong Jeong' }],
   icons: {
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
     shortcut: '/logo.svg',
     apple: '/logo.svg',
   },
-};
+}
 
 const geist = Geist({
   variable: '--font-geist',
@@ -82,31 +83,40 @@ export default async function RootLayout({
     sameAs: [
       'https://www.linkedin.com/in/jaywoong-jeong/',
       'https://github.com/jaywoong-jeong',
-      'https://www.instagram.com/jaywoong.jeong'
-    ]
-  };
+      'https://www.instagram.com/jaywoong.jeong',
+    ],
+  }
   return (
     <html lang="ko" suppressHydrationWarning className={isDark ? 'dark' : ''}>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
-        <ThemeProvider attribute="class" storageKey="theme" defaultTheme={isDark ? 'dark' : 'light'} enableSystem={false}>
-          <ThemeEnforcer />
-            <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-              <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
-                <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
-                  <aside className="lg:sticky lg:top-20 self-start">
-                    <Header />
-                  </aside>
-                  <div>
-                    {children}
-                    <Footer />
-                  </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme={isDark ? 'dark' : 'light'}
+          storageKey="theme"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <RouteTheme />
+          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
+            <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
+              <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
+                <aside className="self-start lg:sticky lg:top-20">
+                  <Header />
+                </aside>
+                <div>
+                  {children}
+                  <Footer />
                 </div>
               </div>
             </div>
+          </div>
         </ThemeProvider>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Analytics />
       </body>
     </html>

@@ -1,49 +1,59 @@
 import { SITE_OWNER } from '@/lib/constants'
-import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
 function getLastUpdated(): string {
-  const roots = [
-    'app',
-    'components',
-    'lib',
-  ]
+  const format = (d: Date) =>
+    d.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
 
-  function latestMTimeInDir(dir: string): number {
-    let latest = 0
-    const abs = path.join(process.cwd(), dir)
-    if (!fs.existsSync(abs)) return latest
-    const entries = fs.readdirSync(abs, { withFileTypes: true })
-    for (const entry of entries) {
-      const p = path.join(abs, entry.name)
-      try {
-        const stat = fs.statSync(p)
-        if (entry.isDirectory()) {
-          latest = Math.max(latest, latestMTimeInDir(path.join(dir, entry.name)))
-        } else {
-          latest = Math.max(latest, stat.mtimeMs)
-        }
-      } catch {}
-    }
-    return latest
+  // 1) Prefer deployment-provided commit timestamp (e.g., Vercel)
+  const vercelTs = process.env.VERCEL_GIT_COMMIT_TIMESTAMP
+  if (vercelTs) {
+    const d = new Date(vercelTs)
+    if (!Number.isNaN(d.getTime())) return format(d)
   }
 
-  try {
-    const latest = Math.max(...roots.map(latestMTimeInDir))
-    if (latest > 0) {
-      const d = new Date(latest)
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  // 2) Optional custom build timestamp if provided
+  const buildTs = process.env.NEXT_PUBLIC_BUILD_TIMESTAMP
+  if (buildTs) {
+    const d = new Date(buildTs)
+    if (!Number.isNaN(d.getTime())) return format(d)
+  }
+
+  // 3) In development, approximate using latest mtime of key source dirs
+  if (process.env.NODE_ENV === 'development') {
+    const roots = ['app', 'components', 'lib']
+    const latestMTimeInDir = (dir: string): number => {
+      let latest = 0
+      const abs = path.join(process.cwd(), dir)
+      if (!fs.existsSync(abs)) return latest
+      const entries = fs.readdirSync(abs, { withFileTypes: true })
+      for (const entry of entries) {
+        const p = path.join(abs, entry.name)
+        try {
+          const stat = fs.statSync(p)
+          latest = Math.max(
+            latest,
+            entry.isDirectory()
+              ? latestMTimeInDir(path.join(dir, entry.name))
+              : stat.mtimeMs,
+          )
+        } catch {}
+      }
+      return latest
     }
-  } catch {}
+    try {
+      const latest = Math.max(...roots.map(latestMTimeInDir))
+      if (latest > 0) return format(new Date(latest))
+    } catch {}
+  }
 
-  try {
-    const gitDate = execSync("git log -1 --format=%cd --date=format:%B %e, %Y", { encoding: 'utf8' }).trim()
-    if (gitDate) return gitDate
-  } catch {}
-
-  const now = new Date()
-  return now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  // 4) Fallback to build time (runtime now)
+  return format(new Date())
 }
 
 export function Footer() {
@@ -53,11 +63,17 @@ export function Footer() {
     <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
         <div className="text-xs text-zinc-500 dark:text-zinc-400">
-          <span>© {currentYear} {SITE_OWNER}</span>
+          <span>
+            © {currentYear} {SITE_OWNER}
+          </span>
           <span className="mx-1">•</span>
           <span>
             Adapted from{' '}
-            <a href="https://github.com/ibelick/nim" target="_blank" className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100">
+            <a
+              href="https://github.com/ibelick/nim"
+              target="_blank"
+              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+            >
               Nim
             </a>
           </span>
