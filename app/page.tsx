@@ -474,13 +474,8 @@ export default function Personal() {
             <li key={pub.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
               <MorphingDialog>
                 <MorphingDialogTrigger>
-                  <div className="flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
-                    {pub.image && (
-                      <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
-                        <Image src={pub.image} alt={pub.imageAlt || pub.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 200px" />
-                      </div>
-                    )}
-                    <div className="mt-2 flex min-w-0 flex-col gap-1 sm:mt-0">
+                  <div className="flex flex-col items-stretch gap-3 p-2">
+                    <div className="flex min-w-0 flex-col gap-1">
                       <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{pub.title}</h4>
                       <div className="text-sm text-zinc-600 dark:text-zinc-400">
                         {pub.authors.map((author, idx) => (
@@ -504,6 +499,11 @@ export default function Personal() {
                       <MorphingDialogSubtitle className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                         {(pub.authors || []).join(', ')} • {pub.status ?? `${pub.venue}, ${pub.year}`}
                       </MorphingDialogSubtitle>
+                      {pub.image && (
+                        <div className="relative mt-4 h-64 w-full overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60">
+                          <Image src={pub.image} alt={pub.imageAlt || pub.title} fill className="object-contain" />
+                        </div>
+                      )}
                       {pub.description && (
                         <MorphingDialogDescription className="mt-4 text-sm text-zinc-700 dark:text-zinc-300">
                           {pub.description}

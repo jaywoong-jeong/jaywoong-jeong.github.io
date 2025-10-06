@@ -393,6 +393,8 @@ export const PUBLICATIONS: Publication[] = [
     year: '2024-',
     status: 'Work in progress',
     id: 'pub-attention-misdirection-wip',
+    description:
+      'We empirically test whether entertainment scandals are used to bury political scandals by leveraging a news archive of 112M+ articles spanning 1990–present. The entire corpus is embedded to form a semantic space, and a hybrid BM25 + vector retrieval pipeline surfaces candidate articles. Retrieved items are then classified with an LLM-as-a-Judge into scandal vs. non-scandal and political vs. entertainment to quantify temporal co-movements and burying patterns at scale.',
     image: '/publications/image.png',
     imageAlt: 'Placeholder image',
   }
