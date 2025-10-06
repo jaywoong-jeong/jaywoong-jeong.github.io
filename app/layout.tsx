@@ -89,11 +89,30 @@ export default async function RootLayout({
       'https://www.instagram.com/jaywoong.jeong',
     ],
   }
+  const initialClass = isDark ? 'dark' : 'light'
+  const initialTheme = isDark ? 'dark' : 'light'
   return (
-    <html lang="ko" suppressHydrationWarning className={isDark ? 'dark' : ''}>
+    <html lang="ko" suppressHydrationWarning className={initialClass}>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
+        {/* No-flash: lock theme before hydration and sync storage */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                var t='${initialTheme}';
+                var d=document.documentElement;
+                if(!d.classList.contains(t)){
+                  d.classList.remove('light','dark');
+                  d.classList.add(t);
+                }
+                try{ localStorage.setItem('theme', t); }catch(e){}
+                document.cookie = 'theme='+t+'; path=/; max-age=31536000';
+              })();
+            `,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme={isDark ? 'dark' : 'light'}

@@ -335,11 +335,11 @@ export default function Personal() {
         <ul className="space-y-4">
           {RESEARCH_ITEMS.map((item) => (
             <li key={item.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
-              <Link href={item.link} className="block rounded-xl p-3">
+              <Link href={item.link} className="block rounded-xl">
                 <div className="relative flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
-                  <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 sm:h-24 sm:w-40 dark:ring-zinc-800/60">
+                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
                     {item.image ? (
-                      <Image src={item.image} alt={item.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 160px" />
+                      <Image src={item.image} alt={item.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 200px" />
                     ) : (
                       <div className="absolute inset-0 grid place-items-center text-xs text-zinc-500 dark:text-zinc-400">No Image</div>
                     )}
