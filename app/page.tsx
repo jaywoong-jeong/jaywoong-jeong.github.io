@@ -13,6 +13,7 @@ import {
   PUBLICATIONS,
   RESEARCH_ITEMS,
 } from './data'
+import type { Publication } from './data'
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -91,6 +92,28 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+  function renderStatus(pub: Publication) {
+    const base = pub.status ?? `${pub.venue}, ${pub.year}`
+    if (!base) return null
+    const hasAwardKeyword = (s: string) => /award|grand prix/i.test(s)
+    const dashIndex = base.indexOf('—')
+    if (dashIndex !== -1) {
+      const left = base.slice(0, dashIndex).trim()
+      const right = base.slice(dashIndex + 1).trim()
+      if (hasAwardKeyword(right)) {
+        return (
+          <>
+            <span>{left} — </span>
+            <span className="font-semibold">🏆 {right}</span>
+          </>
+        )
+      }
+    }
+    if (hasAwardKeyword(base)) {
+      return <span className="font-semibold">🏆 {base}</span>
+    }
+    return base
+  }
   // Local filter state and helpers
   const [filter, setFilter] = useState<
     | 'selected'
@@ -487,7 +510,7 @@ export default function Personal() {
                           </span>
                         ))}
                       </div>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{pub.status ?? `${pub.venue}, ${pub.year}`}</p>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{renderStatus(pub)}</p>
                       
                     </div>
                   </div>
@@ -497,7 +520,7 @@ export default function Personal() {
                     <div className="relative p-6">
                       <MorphingDialogTitle className="text-xl font-medium text-zinc-900 dark:text-zinc-100">{pub.title}</MorphingDialogTitle>
                       <MorphingDialogSubtitle className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                        {(pub.authors || []).join(', ')} • {pub.status ?? `${pub.venue}, ${pub.year}`}
+                        {(pub.authors || []).join(', ')} • {renderStatus(pub)}
                       </MorphingDialogSubtitle>
                       {pub.image && (
                         <div className="relative mt-4 h-64 w-full overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60">
