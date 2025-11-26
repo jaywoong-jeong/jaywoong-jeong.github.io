@@ -8,6 +8,7 @@ import Image from 'next/image'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
+  NEWS,
   EMAIL,
   SOCIAL_LINKS,
   PUBLICATIONS,
@@ -251,7 +252,6 @@ export default function Personal() {
           </p>
         </div>
       </motion.section>
-
       
       <motion.section
         id="work"

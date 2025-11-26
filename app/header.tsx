@@ -2,7 +2,7 @@
 import { TextEffect } from '@/components/ui/text-effect'
 import Link from 'next/link'
 import Image from 'next/image'
-import { SOCIAL_LINKS, EMAIL } from './data'
+import { SOCIAL_LINKS, EMAIL, NEWS } from './data'
 import { usePathname } from 'next/navigation'
 
 export function Header() {
@@ -108,6 +108,22 @@ export function Header() {
           </ul>
         )}
       </nav>
+
+      {!isArtist && (
+        <div className="hidden lg:block mt-6">
+          <h3 className="mb-3 pl-1 text-sm font-semibold text-zinc-900 dark:text-zinc-100">Latest News</h3>
+          <div className="-ml-3 rounded-2xl bg-white p-5 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
+            <ul className="space-y-4 text-sm">
+              {NEWS.map((item) => (
+                <li key={item.id} className="text-zinc-600 dark:text-zinc-400">
+                  <div className="mb-1 font-semibold text-zinc-700 dark:text-zinc-300">{item.date}</div>
+                  <div className="leading-relaxed">{item.content}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

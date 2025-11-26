@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react'
+import Link from 'next/link'
+
 type Project = {
   id: string
   name: string
@@ -91,6 +94,40 @@ export type Publication = {
 }
 
 // Publications data is defined near the end of this file
+
+export type NewsItem = {
+  id: string
+  date: string
+  content: string
+  link?: string
+}
+
+export const NEWS: NewsItem[] = [
+  {
+    id: 'news-dramaforge-urp',
+    date: 'Nov 2025',
+    content: '🎉 DramaForge awarded 🏆 KAIST URP Grand Prix (President\'s Award)!',
+    link: '/publications/DramaForge_UnderReview.pdf',
+  },
+  {
+    id: 'news-aaai-2026-tom',
+    date: 'Nov 2025',
+    content: '📄 Paper on multi-agent social reasoning accepted at AAAI 2026 Theory of Mind Workshop!',
+    link: '#',
+  },
+  {
+    id: 'news-gaze2prompt-award',
+    date: 'Oct 2025',
+    content: '🥳 Gaze2Prompt received the 🏆 Best Poster Award at UbiComp 2025, selected among 68 posters!',
+    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
+  },
+  {
+    id: 'news-gaze2prompt-accept',
+    date: 'Jun 2025',
+    content: '📄 Poster on eye-tracking and multimodal LLMs accepted at UbiComp 2025. See you in Espoo, Finland! 🇫🇮',
+    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
+  },
+]
 
 export const PROJECTS: Project[] = [
   {
