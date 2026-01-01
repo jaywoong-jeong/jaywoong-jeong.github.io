@@ -242,7 +242,7 @@ export const PROJECTS: Project[] = [
     year: '2022',
     image: '/projects/2022_organization_icists_scof_science_communication/cover.png',
     imageAlt: 'SCOF 2022 행사 현장',
-    
+
     links: [
       { label: 'Report', url: '/projects/2022_organization_icists_scof_science_communication/Report.pdf', kind: 'pdf' },
       { label: 'Design', url: '/projects/2022_organization_icists_scof_science_communication/Brochure.pdf', kind: 'pdf' },
@@ -388,7 +388,20 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const PUBLICATIONS: Publication[] = [
-  
+  {
+    title:
+      'Towards Socially Intelligent Agents: An LLM-MARL Framework for Social Deduction Games',
+    authors: ['Jaywoong Jeong'],
+    venue: 'AAAI 2026 Workshop',
+    year: '2026',
+    status: 'AAAI Workshop Advancing Artificial Intelligence through Theory of Mind, 2026',
+    description:
+      'We propose a unified MARL framework that formulates diverse, language-based social deduction games within a shared POMDP. A dense, Theory-of-Mind-inspired reward models how agents influence each other\'s beliefs—encouraging persuasion for "honest" roles and deception for "hidden" ones. This early-stage work aims to establish a foundation for training and evaluating transferable social reasoning skills such as bluffing, cooperation, and misdirection across different games.',
+    link: '/publications/Towards Socially Intelligent Agents An LLM-MARL Framework for Social Deduction Games.pdf',
+    id: 'pub-tom-aaai-2026',
+    tags: ['Multi-Agent', 'Theory of Mind', 'Social Intelligence', 'MARL'],
+  },
+
   {
     title:
       'Gaze2Prompt: Turning Eye-Tracking Data into Visual Prompts for Multimodal LLMs',

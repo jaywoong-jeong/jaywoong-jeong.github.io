@@ -10,32 +10,41 @@ export function Header() {
   const isArtist = pathname?.startsWith('/artist')
   return (
     <header className="mb-8 flex flex-col gap-3 sm:gap-4">
-      <div>
-        <Link href="/" className="font-medium text-black dark:text-white text-xl sm:text-2xl">
-          <span className="inline-flex items-center gap-2">
-            <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} className="dark:invert" />
-            <span>Jaywoong Jeong</span>
-          </span>
-        </Link>
-        <TextEffect
-          key={isArtist ? 'artist-subtitle' : 'home-subtitle'}
-          as="p"
-          preset="fade"
-          per="char"
-          className="break-words whitespace-normal text-sm text-zinc-600 dark:text-zinc-500 sm:text-base"
-          delay={0.5}
-        >
-          {isArtist ? 'Amateur Writer, Actor, and Stand-Up Comedian' : 'Math & Design @ KAIST'}
-        </TextEffect>
-        <a
-          href={`mailto:${EMAIL}`}
-          className="mt-2 inline-block text-sm text-zinc-600 underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-        >
-          {EMAIL}
-        </a>
+      <div className="flex flex-row items-start gap-4 sm:flex-col sm:gap-2">
+        <Image
+          src="/profile.jpeg"
+          alt="Jaywoong Jeong"
+          width={80}
+          height={80}
+          className="h-[80px] w-[80px] shrink-0 rounded-full object-cover ring-2 ring-zinc-200 dark:ring-zinc-800 sm:h-[192px] sm:w-[192px]"
+        />
+        <div className="flex min-w-0 flex-col gap-1 sm:gap-0">
+          <Link href="/" className="font-medium text-black dark:text-white text-xl sm:text-2xl">
+            <span className="inline-flex items-center gap-2">
+              <Image src="/logo.svg" alt="Jaywoong Jeong logo" width={24} height={24} className="dark:invert" />
+              <span>Jaywoong Jeong</span>
+            </span>
+          </Link>
+          <TextEffect
+            key={isArtist ? 'artist-subtitle' : 'home-subtitle'}
+            as="p"
+            preset="fade"
+            per="char"
+            className="break-words whitespace-normal text-sm text-zinc-600 dark:text-zinc-500 sm:text-base"
+            delay={0.5}
+          >
+            {isArtist ? 'Amateur Writer, Actor, and Stand-Up Comedian' : 'Math & Design @ KAIST'}
+          </TextEffect>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="mt-1 inline-block text-sm text-zinc-600 underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+          >
+            {EMAIL}
+          </a>
+        </div>
       </div>
 
-      <div className="hidden flex-wrap gap-2 lg:flex">
+      <div className="flex flex-wrap gap-2">
         {SOCIAL_LINKS.map((link) => (
           <a
             key={link.label}
@@ -63,8 +72,8 @@ export function Header() {
           </a>
         ))}
       </div>
-      
-      <nav aria-label="Primary" className="text-sm">
+
+      <nav aria-label="Primary" className="hidden text-sm sm:block">
         {isArtist ? (
           <ul className="flex flex-col gap-2 text-zinc-600 dark:text-zinc-400">
             <li>
