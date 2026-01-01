@@ -14,8 +14,10 @@ export function Header() {
         <Image
           src="/profile.jpeg"
           alt="Jaywoong Jeong"
-          width={80}
-          height={80}
+          width={192}
+          height={192}
+          priority
+          sizes="(max-width: 640px) 80px, 192px"
           className="h-[80px] w-[80px] shrink-0 rounded-full object-cover ring-2 ring-zinc-200 dark:ring-zinc-800 sm:h-[192px] sm:w-[192px]"
         />
         <div className="flex min-w-0 flex-col gap-1 sm:gap-0">
