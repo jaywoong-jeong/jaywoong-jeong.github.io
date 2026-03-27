@@ -94,6 +94,7 @@ export default async function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning className={initialClass}>
       <body
+        suppressHydrationWarning
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
         {/* No-flash: lock theme before hydration and sync storage */}

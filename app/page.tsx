@@ -493,7 +493,7 @@ export default function Personal() {
       >
         <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Publications</h3>
         <ul className="space-y-4">
-          {PUBLICATIONS.slice().reverse().map((pub) => (
+          {PUBLICATIONS.map((pub) => (
             <li key={pub.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
               <MorphingDialog>
                 <MorphingDialogTrigger>
