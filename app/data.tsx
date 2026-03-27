@@ -107,7 +107,7 @@ export const NEWS: NewsItem[] = [
     id: 'news-chi-workshops-2026',
     date: 'Mar 2026',
     content: '🎉 Two papers accepted at ACM CHI 2026 Workshops (PoliSim & Herding CATs)!',
-    link: '/publications/CHI_PoliSim_2026_JaywoongJeong.pdf',
+    link: '/publications/CHI_2026_PoliSim_Let-Them-Speak.pdf',
   },
   {
     id: 'news-dramaforge-urp',
@@ -131,7 +131,7 @@ export const NEWS: NewsItem[] = [
     id: 'news-gaze2prompt-accept',
     date: 'Jun 2025',
     content: '📄 Poster on eye-tracking and multimodal LLMs accepted at UbiComp 2025. See you in Espoo, Finland! 🇫🇮',
-    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
+    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs.pdf',
   },
 ]
 
@@ -399,7 +399,7 @@ export const PUBLICATIONS: Publication[] = [
     authors: ['Jaywoong Jeong'],
     venue: 'ACM CHI - Workshop on PoliSim, 2026',
     year: '2026',
-    status: 'To appear',
+    status: 'ACM CHI - Workshop on PoliSim, 2026 (To appear)',
     description: 'Proposes Let Them Speak, a framework for ex-ante policy auditing that uses blind-spot-targeted LLM simulation to identify and generate the voices of structurally excluded individuals.',
     tags: ['LLM Simulation', 'Policy Auditing', 'Algorithmic Fairness'],
     link: '/publications/CHI_PoliSim_2026_JaywoongJeong.pdf',
@@ -420,7 +420,7 @@ export const PUBLICATIONS: Publication[] = [
     ],
     venue: 'ACM CHI - Workshop on Herding CATs, 2026',
     year: '2026',
-    status: 'To appear',
+    status: 'ACM CHI - Workshop on Herding CATs, 2026 (To appear)',
     description: 'Introduces Trax, a web-based environment that visualizes the opaque trajectories of asynchronous music production by coupling Timestamped Pinning with Automated Audio Diff.',
     tags: ['Music Collaboration', 'Creativity Support Tools', 'HCI'],
     link: '/publications/CHI_2026_Herding-CATs_TRAX- Bridging the Gap in Asynchronous Music Collaboration.pdf',
@@ -473,7 +473,7 @@ export const PUBLICATIONS: Publication[] = [
     status: 'UbiComp Companion, 2025 — Best Poster Award',
     description:
       'Proposes a method for converting eye-tracking signals into visual prompts to enhance multimodal LLM performance, enabling attention-aware interaction and analysis.',
-    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
+    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs.pdf',
     id: 'pub-gaze2prompt-2025',
     tags: ['Multimodal', 'Eye Tracking', 'LLM', 'Best Poster Award'],
     image: '/publications/Gaze2Prompt Cover.png',
