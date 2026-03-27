@@ -104,6 +104,12 @@ export type NewsItem = {
 
 export const NEWS: NewsItem[] = [
   {
+    id: 'news-chi-workshops-2026',
+    date: 'Mar 2026',
+    content: '🎉 Two papers accepted at ACM CHI 2026 Workshops (PoliSim & Herding CATs)!',
+    link: '/publications/CHI_PoliSim_2026_JaywoongJeong.pdf',
+  },
+  {
     id: 'news-dramaforge-urp',
     date: 'Nov 2025',
     content: '🎉 DramaForge awarded 🏆 KAIST URP Grand Prix (President\'s Award)!',
@@ -119,7 +125,7 @@ export const NEWS: NewsItem[] = [
     id: 'news-gaze2prompt-award',
     date: 'Oct 2025',
     content: '🥳 Gaze2Prompt received the 🏆 Best Poster Award at UbiComp 2025, selected among 68 posters!',
-    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs (1).pdf',
+    link: '/publications/Gaze2Prompt_Turning_Eye_Tracking_Data_into_Visual_Prompts_for_Multimodal_LLMs.pdf',
   },
   {
     id: 'news-gaze2prompt-accept',
@@ -389,6 +395,40 @@ export const SOCIAL_LINKS: SocialLink[] = [
 
 export const PUBLICATIONS: Publication[] = [
   {
+    title: 'Let Them Speak: Finding Who Policy Leaves Behind via Blind-Spot-Targeted LLM Simulation',
+    authors: ['Jaywoong Jeong'],
+    venue: 'ACM CHI - Workshop on PoliSim, 2026',
+    year: '2026',
+    status: 'To appear',
+    description: 'Proposes Let Them Speak, a framework for ex-ante policy auditing that uses blind-spot-targeted LLM simulation to identify and generate the voices of structurally excluded individuals.',
+    tags: ['LLM Simulation', 'Policy Auditing', 'Algorithmic Fairness'],
+    link: '/publications/CHI_PoliSim_2026_JaywoongJeong.pdf',
+    id: 'pub-let-them-speak-2026',
+    image: '/publications/let-them-speak-cover.png',
+    imageAlt: 'Let Them Speak cover',
+  },
+  {
+    title: 'TRAX: Bridging the Gap in Asynchronous Music Collaboration',
+    authors: [
+      'Jaywoong Jeong',
+      'Dongwoo Kim',
+      'Jaehong Jung*',
+      'Dohyun Ko*',
+      'Jiwon Eom*',
+      'Sangmin Lim*',
+      'Juchan Lee†',
+    ],
+    venue: 'ACM CHI - Workshop on Herding CATs, 2026',
+    year: '2026',
+    status: 'To appear',
+    description: 'Introduces Trax, a web-based environment that visualizes the opaque trajectories of asynchronous music production by coupling Timestamped Pinning with Automated Audio Diff.',
+    tags: ['Music Collaboration', 'Creativity Support Tools', 'HCI'],
+    link: '/publications/CHI_2026_Herding-CATs_TRAX- Bridging the Gap in Asynchronous Music Collaboration.pdf',
+    id: 'pub-trax-2026',
+    image: '/publications/trax-cover.png',
+    imageAlt: 'TRAX cover',
+  },
+  {
     title:
       'Towards Socially Intelligent Agents: An LLM-MARL Framework for Social Deduction Games',
     authors: ['Jaywoong Jeong'],
@@ -402,6 +442,21 @@ export const PUBLICATIONS: Publication[] = [
     tags: ['Multi-Agent', 'Theory of Mind', 'Social Intelligence', 'MARL'],
   },
 
+  {
+    title:
+      'DramaForge: AI-Assisted Tool for Script Analysis and Adaptation Considering Production Constraints',
+    authors: ['Jaywoong Jeong', 'Jae Young Choi', 'Seon Gyeom Kim', 'Tak Yeon Lee'],
+    venue: 'Preprint',
+    year: '2025',
+    status: "Preprint, 2025 — KAIST Undergraduate Research Program (URP) Grand Prix (President's Award)",
+    description:
+      "DramaForge is a system that uses LLMs to analyze theatrical scripts' structural dependencies and propose targeted adaptation options that meet user constraints while supporting collaborative workflows and maintaining human creative control. We are currently conducting an in-lab user study to evaluate UX and workflow impacts.",
+    link: '/publications/DramaForge_UnderReview.pdf',
+    id: 'pub-dramaforge-2025',
+    tags: ['LLM', 'Creativity Support', 'HCI'],
+    image: '/publications/DramaForge-Cover.png',
+    imageAlt: 'DramaForge cover',
+  },
   {
     title:
       'Gaze2Prompt: Turning Eye-Tracking Data into Visual Prompts for Multimodal LLMs',
@@ -423,21 +478,6 @@ export const PUBLICATIONS: Publication[] = [
     tags: ['Multimodal', 'Eye Tracking', 'LLM', 'Best Poster Award'],
     image: '/publications/Gaze2Prompt Cover.png',
     imageAlt: 'Gaze2Prompt cover',
-  },
-  {
-    title:
-      'DramaForge: AI-Assisted Tool for Script Analysis and Adaptation Considering Production Constraints',
-    authors: ['Jaywoong Jeong', 'Jae Young Choi', 'Seon Gyeom Kim', 'Tak Yeon Lee'],
-    venue: 'Preprint',
-    year: '2025',
-    status: "Preprint, 2025 — KAIST Undergraduate Research Program (URP) Grand Prix (President's Award)",
-    description:
-      "DramaForge is a system that uses LLMs to analyze theatrical scripts' structural dependencies and propose targeted adaptation options that meet user constraints while supporting collaborative workflows and maintaining human creative control. We are currently conducting an in-lab user study to evaluate UX and workflow impacts.",
-    link: '/publications/DramaForge_UnderReview.pdf',
-    id: 'pub-dramaforge-2025',
-    tags: ['LLM', 'Creativity Support', 'HCI'],
-    image: '/publications/DramaForge-Cover.png',
-    imageAlt: 'DramaForge cover',
   },
   {
     title:
