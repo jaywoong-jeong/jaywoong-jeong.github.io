@@ -116,6 +116,11 @@ export function Header() {
                 Publications
               </Link>
             </li>
+            <li>
+              <Link href="/blog" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
+                Blog
+              </Link>
+            </li>
           </ul>
         )}
       </nav>

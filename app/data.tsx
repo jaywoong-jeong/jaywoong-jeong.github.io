@@ -45,6 +45,8 @@ type BlogPost = {
   description: string
   link: string
   uid: string
+  date?: string
+  draft?: boolean
 }
 
 // Research (MDX-based) minimal metadata
@@ -355,25 +357,30 @@ export const ADVISORS: Advisor[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: '배달앱 별점에 관하여',
-    description: '별점이 만드는 인센티브, 왜곡, 그리고 개선 아이디어.',
-    link: '/blog/delivery-app-ratings',
-    uid: 'blog-delivery-app-ratings',
+    title: "Don't Ban the Car. Build the Seat Belt.",
+    description: 'Why banning AI in education is the wrong approach and how we should adapt instead.',
+    link: '/blog/dont-ban-the-car-build-the-seat-belt',
+    uid: 'blog-dont-ban-the-car-build-the-seat-belt',
+    date: 'Apr 8, 2026',
+    draft: false,
   },
   {
-    title: '급식을 남기지 않는 법',
-    description: '남김 없이 맛있게 먹는 작은 습관과 루틴.',
-    link: '/blog/how-not-to-leave-lunch',
-    uid: 'blog-how-not-to-leave-lunch',
+    title: 'Invisible leash of AirPods',
+    description: 'How wireless technology evolved from a tool of liberation to an invisible leash.',
+    link: '/blog/invisible-leash-of-airpods',
+    uid: 'blog-invisible-leash-of-airpods',
+    date: 'Mar 25, 2026',
+    draft: false,
   },
   {
-    title: '운 9, 실력 1',
-    description: '운과 실력의 비율을 다시 생각해보는 짧은 에세이.',
-    link: '/blog/luck-9-skill-1',
-    uid: 'blog-luck-9-skill-1',
-  },
+    title: 'ChatGPT is our NEW DOPAMINE',
+    description: 'A reflection on AI dependency, instant gratification, and the value of intellectual struggle.',
+    link: '/blog/chatgpt-is-our-new-dopamine',
+    uid: 'blog-chatgpt-is-our-new-dopamine',
+    date: 'Mar 4, 2026',
+    draft: false,
+  }
 ]
-
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'LinkedIn',
