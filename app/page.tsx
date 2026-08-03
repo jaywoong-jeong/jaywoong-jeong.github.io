@@ -1,50 +1,30 @@
 'use client'
+
+import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'motion/react'
 import { Spotlight } from '@/components/ui/spotlight'
-import { Magnetic } from '@/components/ui/magnetic'
-import Link from 'next/link'
-import { useMemo, useState } from 'react'
-import Image from 'next/image'
+import { ObfuscatedEmailLink } from '@/components/ObfuscatedEmailLink'
 import {
   PROJECTS,
-  WORK_EXPERIENCE,
-  NEWS,
-  EMAIL,
-  SOCIAL_LINKS,
   PUBLICATIONS,
-  RESEARCH_ITEMS,
+  RESEARCH_COLLABORATIONS,
+  RESEARCH_EXPERIENCE,
 } from './data'
-import type { Publication } from './data'
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContainer,
-  MorphingDialogContent,
-  MorphingDialogClose,
-  MorphingDialogTitle,
-  MorphingDialogSubtitle,
-  MorphingDialogDescription,
-} from '@/components/ui/morphing-dialog'
 
 const LINKS = {
   kaist: 'https://www.kaist.ac.kr/en/',
-  aix: 'https://ai-experience-lab.github.io/',
-  cstl: 'https://cstlab.org/',
+  lids: 'https://lids.mit.edu/',
+  ael: 'https://ai-experience-lab.github.io/',
   takyeon: 'https://takyeonlee.com/',
-  seering: 'https://joseph.seering.org/index.html',
-  johan: 'https://mitsloan.mit.edu/faculty/directory/johan-chu',
-  mitSloan: 'https://mitsloan.mit.edu/',
-  vc: 'https://en.wikipedia.org/wiki/Venture_capital',
-  companyK: 'https://kpartners.co.kr/wordpress/en/',
+  asuman: 'https://asu.mit.edu/',
 }
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.12 },
   },
 }
 
@@ -53,131 +33,265 @@ const VARIANTS_SECTION = {
   visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
 }
 
-const TRANSITION_SECTION = {
-  duration: 0.3,
+const TRANSITION_SECTION = { duration: 0.3 }
+
+const textLink =
+  'underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-zinc-950 dark:decoration-zinc-700 dark:hover:text-zinc-100'
+
+function VenueWithAward({ venue }: { venue?: string }) {
+  const match = venue?.match(
+    /(Best Poster Award|Grand Prix|Spotlight(?:\s*\([^)]*\))?)/i,
+  )
+
+  if (!venue || !match || match.index === undefined) return venue
+
+  return (
+    <>
+      {venue.slice(0, match.index)}
+      <span aria-label="Award" title="Award">
+        🏆{' '}
+      </span>
+      {venue.slice(match.index)}
+    </>
+  )
 }
 
-
-function MagneticSocialLink({
+function Section({
+  id,
+  title,
+  action,
   children,
-  link,
 }: {
+  id: string
+  title: string
+  action?: React.ReactNode
   children: React.ReactNode
-  link: string
 }) {
   return (
-    <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
-      <a
-        href={link}
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
-      >
-        {children}
-        <svg
-          width="15"
-          height="15"
-          viewBox="0 0 15 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-3 w-3"
+    <motion.section
+      id={id}
+      variants={VARIANTS_SECTION}
+      transition={TRANSITION_SECTION}
+      className="scroll-mt-10"
+    >
+      <div className="mb-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h2 className="text-lg font-medium sm:text-xl">{title}</h2>
+        {action}
+      </div>
+      {children}
+    </motion.section>
+  )
+}
+
+function InstitutionLogos({
+  logos,
+}: {
+  logos?: { label: string; domain: string; src?: string }[]
+}) {
+  if (!logos?.length) return null
+
+  return (
+    <div className="flex w-16 shrink-0 flex-col gap-2 sm:w-20">
+      {logos.map((logo) => (
+        <div
+          key={`${logo.domain}-${logo.label}`}
+          title={logo.label}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2.5 shadow-sm ring-1 ring-zinc-200/70 sm:h-20 sm:w-20 dark:bg-zinc-900 dark:ring-zinc-700/70"
         >
-          <path
-            d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z"
-            fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      </a>
-    </Magnetic>
+          <Image
+            src={
+              logo.src ||
+              `https://www.google.com/s2/favicons?domain=${logo.domain}&sz=128`
+            }
+            alt={`${logo.label} logo`}
+            width={60}
+            height={60}
+            className="h-12 w-12 object-contain sm:h-[60px] sm:w-[60px]"
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Publications() {
+  const selectedPublicationIds = [
+    'pub-tides-2026',
+    'pub-gaze2prompt-2025',
+    'pub-orgprocessgym-2026',
+  ]
+  const selectedPublications = selectedPublicationIds
+    .map((id) => PUBLICATIONS.find((publication) => publication.id === id))
+    .filter((publication) => publication !== undefined)
+
+  return (
+    <Section
+      id="publications"
+      title="Selected Publications"
+      action={
+        <Link
+          href="/publications"
+          className="inline-flex items-center gap-1 text-sm text-zinc-500 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100"
+        >
+          View all publications <span aria-hidden="true">→</span>
+        </Link>
+      }
+    >
+      <ul className="space-y-3">
+        {selectedPublications.map((publication) => (
+          <motion.li
+            key={publication.id}
+            variants={VARIANTS_SECTION}
+            transition={TRANSITION_SECTION}
+            whileHover={{ y: -2 }}
+            className="group relative rounded-2xl bg-white p-4 text-sm leading-relaxed ring-1 ring-zinc-200/60 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm hover:ring-zinc-300/80 dark:bg-zinc-950 dark:ring-zinc-800/70 dark:hover:ring-zinc-700"
+          >
+            <Spotlight
+              size={220}
+              className="from-zinc-100 via-zinc-100/70 to-transparent dark:from-zinc-800 dark:via-zinc-900 dark:to-transparent"
+            />
+            <div className="relative z-10 min-w-0 py-0.5">
+              <p className="text-base leading-snug text-zinc-900 dark:text-zinc-100">
+                <span className="font-medium">{publication.title}.</span>
+              </p>
+              <p className="mt-1 text-zinc-500 italic dark:text-zinc-400">
+                <VenueWithAward venue={publication.venue} /> ·{' '}
+                {publication.year}
+              </p>
+              <p className="mt-0.5 text-zinc-600 dark:text-zinc-400">
+                {publication.authors.map((author, index) => (
+                  <span key={`${publication.id}-${author}-${index}`}>
+                    <span
+                      className={
+                        author === 'Jaywoong Jeong'
+                          ? 'font-medium text-zinc-900 dark:text-zinc-100'
+                          : undefined
+                      }
+                    >
+                      {author}
+                    </span>
+                    {index < publication.authors.length - 1 ? ', ' : ''}
+                  </span>
+                ))}
+              </p>
+              {(publication.link || publication.links?.length) && (
+                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                  {publication.link && (
+                    <a
+                      href={publication.link}
+                      target={publication.link === '#' ? undefined : '_blank'}
+                      rel={
+                        publication.link === '#'
+                          ? undefined
+                          : 'noopener noreferrer'
+                      }
+                      aria-disabled={
+                        publication.link === '#' ? 'true' : undefined
+                      }
+                      title={
+                        publication.link === '#'
+                          ? 'Paper coming soon'
+                          : undefined
+                      }
+                      onClick={
+                        publication.link === '#'
+                          ? (event) => event.preventDefault()
+                          : undefined
+                      }
+                      className={`${textLink} text-zinc-600 dark:text-zinc-400 ${
+                        publication.link === '#' ? 'cursor-not-allowed' : ''
+                      }`}
+                    >
+                      Paper
+                    </a>
+                  )}
+                  {publication.links?.map((link) => (
+                    <a
+                      key={`${publication.id}-${link.label}`}
+                      href={link.url}
+                      target={
+                        link.url.startsWith('http') ? '_blank' : undefined
+                      }
+                      rel={
+                        link.url.startsWith('http')
+                          ? 'noopener noreferrer'
+                          : undefined
+                      }
+                      className={`${textLink} text-zinc-600 dark:text-zinc-400`}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </motion.li>
+        ))}
+      </ul>
+    </Section>
+  )
+}
+
+function SelectedProjects() {
+  const selectedProjects = PROJECTS.filter((project) => project.selected)
+
+  return (
+    <Section
+      id="selected-projects"
+      title="Selected Projects"
+      action={
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-1 text-sm text-zinc-500 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100"
+        >
+          View all projects <span aria-hidden="true">→</span>
+        </Link>
+      }
+    >
+      <ul className="grid gap-4 md:grid-cols-3">
+        {selectedProjects.map((project) => (
+          <motion.li
+            key={project.id}
+            variants={VARIANTS_SECTION}
+            transition={TRANSITION_SECTION}
+            whileHover={{ y: -3 }}
+            className="group overflow-hidden rounded-2xl bg-white ring-1 ring-zinc-200/60 transition-shadow hover:shadow-md dark:bg-zinc-950 dark:ring-zinc-800/70"
+          >
+            <Link href={`/projects/${project.id}`} className="block h-full">
+              <div className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-white">
+                <Image
+                  src={project.image || '/next.svg'}
+                  alt={project.imageAlt || project.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 360px"
+                  className="object-contain"
+                />
+              </div>
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="leading-snug font-medium text-zinc-900 dark:text-zinc-100">
+                    {project.name}
+                  </h3>
+                  <span className="shrink-0 text-xs text-zinc-400 tabular-nums">
+                    {project.year}
+                  </span>
+                </div>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  {project.description}
+                </p>
+              </div>
+            </Link>
+          </motion.li>
+        ))}
+      </ul>
+    </Section>
   )
 }
 
 export default function Personal() {
-  function renderStatus(pub: Publication) {
-    const base = pub.status ?? `${pub.venue}, ${pub.year}`
-    if (!base) return null
-    const hasAwardKeyword = (s: string) => /award|grand prix/i.test(s)
-    const dashIndex = base.indexOf('—')
-    if (dashIndex !== -1) {
-      const left = base.slice(0, dashIndex).trim()
-      const right = base.slice(dashIndex + 1).trim()
-      if (hasAwardKeyword(right)) {
-        return (
-          <>
-            <span>{left} — </span>
-            <span className="font-semibold">🏆 {right}</span>
-          </>
-        )
-      }
-    }
-    if (hasAwardKeyword(base)) {
-      return <span className="font-semibold">🏆 {base}</span>
-    }
-    return base
-  }
-  // Local filter state and helpers
-  const [filter, setFilter] = useState<
-    | 'selected'
-    | 'course'
-    | 'competition'
-    | 'organization'
-    | 'company'
-    | 'design'
-    | 'strategy'
-    | 'research'
-  >('selected')
-  
-
-
-  function useFilteredProjects() {
-    return useMemo(() => {
-      return PROJECTS.filter((p) => {
-        const isContext = (
-          filter === 'course' ||
-          filter === 'competition' ||
-          filter === 'organization' ||
-          filter === 'company'
-        )
-        if (filter === 'selected') return Boolean(p.selected)
-        if (isContext) return p.context.kind === filter
-        return p.types.includes(filter)
-      })
-    }, [filter])
-  }
-
-  function ProjectsFilters() {
-    const baseBtn = 'inline-flex items-center rounded-full border px-2.5 py-1 text-xs transition-colors'
-    const active = 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
-    const inactive = 'border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800'
-    const groupCls = 'flex flex-wrap items-center gap-2'
-    const labelCls = 'mr-2 text-xs text-zinc-500'
-    const labelMap: Record<string, string> = {
-      selected: 'Selected',
-      course: 'Coursework',
-      competition: 'Competition',
-      organization: 'Organization',
-      company: 'Company',
-      design: 'Design',
-      strategy: 'Strategy',
-      research: 'Research',
-    }
-
-    return (
-      <div className="mb-4 space-y-2">
-        <div className={groupCls}>
-          <span className={labelCls}>Filter</span>
-          {(['selected','course','competition','organization','company','design','strategy','research'] as const).map((k) => (
-            <button key={k} className={`${baseBtn} ${filter === k ? active : inactive}`} onClick={() => setFilter(k)}>
-              {labelMap[k]}
-            </button>
-          ))}
-        </div>
-      </div>
-    )
-  }
   return (
     <motion.main
-      className="space-y-10"
+      className="space-y-16"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -186,402 +300,238 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <div className="flex-1">
-          <p className="text-zinc-600 dark:text-zinc-400">
+        <div className="max-w-5xl space-y-4 text-zinc-600 dark:text-zinc-400">
+          <p>
             Hello! I&apos;m an undergraduate student at{' '}
-            <a
-              href={LINKS.kaist}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
+            <a href={LINKS.kaist} className={textLink}>
               KAIST
-            </a>
-            . Currently, I work as a researcher with{' '}
-            <a
-              href={LINKS.takyeon}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
-              Tak Yeon Lee
             </a>{' '}
-            at the{' '}
+            studying{' '}
             <a
-              href={LINKS.aix}
+              href="https://sts.kaist.ac.kr/en/"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+              className="group inline-flex items-baseline outline-none"
+              aria-label="Learn about KAIST School of Transdisciplinary Studies"
             >
-              AI Experience Lab
+              <abbr
+                title="School of Transdisciplinary Studies"
+                className="text-zinc-900 no-underline decoration-zinc-300 underline-offset-4 group-hover:underline group-focus:underline dark:text-zinc-100 dark:decoration-zinc-700"
+              >
+                STS
+              </abbr>
+              <span
+                aria-hidden="true"
+                className="inline-block max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 ease-out group-hover:max-w-28 group-hover:opacity-100 group-focus:max-w-28 group-focus:opacity-100"
+              >
+                <span className="ml-1 text-xs text-zinc-400">
+                  (What is STS?)
+                </span>
+              </span>
             </a>{' '}
-            and{' '}
-            <a
-              href={LINKS.johan}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
-              Johan Chu
+            and Mathematical Sciences, with a minor in Design. My work sits at
+            the intersection of social AI, multi-agent systems, and
+            human-computer interaction. I am especially interested in how AI
+            systems can understand people and groups—and how they can augment
+            human creativity, collaboration, and decision-making.
+          </p>
+          <p>
+            I currently conduct research with{' '}
+            <a href={LINKS.asuman} className={textLink}>
+              Asuman Özdağlar
             </a>{' '}
             at{' '}
-            <a
-              href={LINKS.mitSloan}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
-              MIT Sloan
+            <a href={LINKS.lids} className={textLink}>
+              MIT LIDS
             </a>
-            .{' '}My research focuses on developing social AI and creativity augmentation tools while examining their societal impact. I aspire to become an HCI and Computational Social Science researcher. My background in{' '}
-            <a
-              href={LINKS.companyK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
-              venture capital
-            </a>{' '}and startups gives me both technical and business perspectives for impactful work.
-            {' '}Outside of research, I secretly pursue theater and stand-up comedy.{' '}
-            <a
-              href="/artist"
-              className="text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-            >
+            , with{' '}
+            <a href={LINKS.takyeon} className={textLink}>
+              Tak Yeon Lee
+            </a>{' '}
+            at{' '}
+            <a href={LINKS.ael} className={textLink}>
+              AI Experience Lab
+            </a>
+            . Across these collaborations, I combine computational methods,
+            system building, and human-centered evaluation to study how
+            intelligent systems behave within real social and organizational
+            contexts. Outside of research, I secretly pursue theater and
+            stand-up comedy.{' '}
+            <Link href="/artist" className={textLink}>
               Check out my creative page
-            </a>{' '}to see this side of me.
+            </Link>{' '}
+            to see this side of me.
+          </p>
+          <p>
+            I also keep a{' '}
+            <a
+              href="#"
+              aria-disabled="true"
+              title="Research manifesto coming soon"
+              onClick={(event) => event.preventDefault()}
+              className={`${textLink} cursor-not-allowed`}
+            >
+              research manifesto
+            </a>{' '}
+            on the research I want to pursue, the problems I hope to solve, and
+            the kind of life I want to live.
           </p>
         </div>
       </motion.section>
-      
-      <motion.section
-        id="work"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map((job) => (
-            <div
-              className="group/card relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              key={job.id}
+
+      <Publications />
+
+      <Section id="research-experience" title="Research Experience">
+        <ol className="space-y-2">
+          {RESEARCH_EXPERIENCE.map((experience) => (
+            <motion.li
+              key={experience.id}
+              variants={VARIANTS_SECTION}
+              transition={TRANSITION_SECTION}
+              whileHover={{ y: -2 }}
+              className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200/60 transition-shadow hover:shadow-md dark:bg-zinc-950 dark:ring-zinc-800/70"
             >
               <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
+                size={180}
+                className="from-zinc-100 via-zinc-100/70 to-transparent dark:from-zinc-800 dark:via-zinc-900 dark:to-transparent"
               />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <a
-                  href={job.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${job.company}`}
-                  className="absolute inset-0 z-10"
-                />
-                <div className="relative flex w-full flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h4 className="font-normal dark:text-zinc-100">
-                      {job.title}
-                    </h4>
-                    <p className="text-zinc-500 dark:text-zinc-400">
-                      {job.company}
-                    </p>
-                    {(job.advisor || (job.mentors && job.mentors.length > 0)) && (
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400 space-y-1 sm:space-y-0 sm:flex sm:items-center sm:gap-2 sm:whitespace-nowrap">
-                        {job.advisor && (
-                          <span className="block sm:inline">
-                            Advisor:{' '}
-                            {job.advisor.link ? (
-                              <a
-                                href={job.advisor.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                              >
-                                {`Prof. ${job.advisor.name}`}
-                              </a>
-                            ) : (
-                              `Prof. ${job.advisor.name}`
-                            )}
-                          </span>
-                        )}
-                        {job.advisor && job.mentors && job.mentors.length > 0 && (
-                          <span className="hidden sm:inline"> | </span>
-                        )}
-                        {job.mentors && job.mentors.length > 0 && (
-                          <span className="block sm:inline">
-                            Mentor{job.mentors.length > 1 ? 's' : ''}:{' '}
-                            {job.mentors.map((m, idx) => (
-                              <span key={`${job.id}-mentor-${idx}`}>
-                                {m.link ? (
-                                  <a
-                                    href={m.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="relative z-20 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                                  >
-                                    {m.name}
-                                  </a>
-                                ) : (
-                                  m.name
-                                )}
-                                {idx < job.mentors!.length - 1 ? ', ' : ''}
-                              </span>
-                            ))}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  <p className="whitespace-nowrap text-zinc-600 dark:text-zinc-400 sm:text-right">
-                    {job.start} - {job.end}
-                  </p>
-                </div>
-                {job.details && job.details.length > 0 && (
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-400">
-                    {job.details.map((detail, index) => (
-                      <li key={index}>{detail}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section
-        id="research"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Research</h3>
-        <ul className="space-y-4">
-          {RESEARCH_ITEMS.map((item) => (
-            <li key={item.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
-              <Link href={item.link} className="block rounded-xl">
-                <div className="relative flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
-                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
-                    {item.image ? (
-                      <Image src={item.image} alt={item.title} fill className="object-contain" sizes="(max-width: 640px) 100vw, 200px" />
-                    ) : (
-                      <div className="absolute inset-0 grid place-items-center text-xs text-zinc-500 dark:text-zinc-400">No Image</div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h4 className="line-clamp-2 text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{item.title}</h4>
-                    {(item.affiliation || item.programTag) && (
-                      <div className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                        {item.affiliation && (
-                          <span className="break-words whitespace-normal">{item.affiliation}</span>
-                        )}
-                        {item.programTag && (
-                          <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">{item.programTag}</span>
-                        )}
-                      </div>
-                    )}
-                    
-                    {item.summary && (
-                      <p className="mt-1 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400">{item.summary}</p>
-                    )}
-                    {item.topics && item.topics.length > 0 && (
-                      <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                        {item.topics.map((t) => (
-                          <span key={t} className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">{t}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </motion.section>
-
-      
-      <motion.section
-        id="projects"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Projects</h3>
-        <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-          Below is a collection of work I&apos;ve done through coursework, competitions, companies, and organizations. 
-          <br></br><span className="text-blue-600 dark:text-blue-400">Click on each card</span> to see detailed information.
-        </p>
-        {/* Filters */}
-        <ProjectsFilters />
-        <ul className="space-y-4">
-          {useFilteredProjects().map((project) => (
-            <li key={project.id} className="group/card rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 transition-all duration-200 hover:ring-zinc-300/80 dark:bg-zinc-950 dark:ring-zinc-800/60 dark:hover:ring-zinc-700/80">
-              <div className="relative">
-                <Link 
-                  href={`/projects/${project.id}`} 
-                  className="absolute inset-0 z-10"
-                  aria-label={`View ${project.name} project details`}
-                />
-                <div className="relative flex flex-col items-stretch gap-3 p-2 sm:flex-row sm:gap-4">
-                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60 sm:h-28 sm:w-40">
-                    <Image 
-                      src={project.image || '/next.svg'} 
-                      alt={project.imageAlt || 'placeholder'} 
-                      fill 
-                      className={project.image ? 'object-contain' : 'object-contain p-6 opacity-70 dark:opacity-60'} 
-                      sizes="(max-width: 640px) 100vw, 200px" 
-                    />
-                  </div>
-                  <div className="mt-2 flex min-w-0 flex-col gap-1 sm:mt-0">
-                    <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">
-                      {project.name}
-                      <span className="block h-[1px] max-w-0 bg-zinc-900 transition-all duration-200 group-hover/card:max-w-full dark:bg-zinc-50"></span>
-                    </h4>
-                    <p className="text-sm text-zinc-600 break-words hyphens-auto dark:text-zinc-400">{project.description}</p>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {(() => {
-                        const mapColor: Record<string, string> = {
-                          course: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
-                          competition: 'bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300',
-                          company: 'bg-slate-100 text-slate-800 dark:bg-slate-900/30 dark:text-slate-300',
-                          organization: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
-                        }
-                        const labelMap: Record<string, string> = {
-                          course: 'Coursework',
-                          competition: 'Competition',
-                          company: 'Company',
-                          organization: 'Organization',
-                        }
-                        const cls = mapColor[project.context.kind] || 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
-                        return (
-                          <span className={`rounded-full px-2 py-0.5 text-xs ${cls}`}>{labelMap[project.context.kind]}</span>
-                        )
-                      })()}
-                      {project.types.map((t) => (
-                        <span key={`${project.id}-type-${t}`} className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-700 capitalize dark:bg-blue-900/30 dark:text-blue-300">{t}</span>
-                      ))}
-                      <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">{project.year}</span>
-                    </div>
-                    {project.links && project.links.length > 0 ? (
-                      <div className="relative z-20 mt-2 flex flex-wrap gap-3">
-                        {project.links.map((l, idx) => (
+              <div className="relative z-10 flex items-start gap-4">
+                <InstitutionLogos logos={experience.logos} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                    <div className="min-w-0">
+                      <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+                        {experience.link ? (
                           <a
-                            key={`${project.id}-link-${idx}`}
-                            href={l.url}
+                            href={experience.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative z-20 text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+                            className="transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
                           >
-                            {l.label}
+                            {experience.institution} ↗
                           </a>
-                        ))}
-                      </div>
-                    ) : null}
+                        ) : (
+                          experience.institution
+                        )}
+                      </h3>
+                      <p className="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">
+                        {experience.role}
+                      </p>
+                    </div>
+                    <span className="shrink-0 text-sm text-zinc-400 tabular-nums">
+                      {experience.period}
+                    </span>
                   </div>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </motion.section>
-
-      
-      
-
-      <motion.section
-        id="publications"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-xl font-semibold sm:text-2xl">Publications</h3>
-        <ul className="space-y-4">
-          {PUBLICATIONS.map((pub) => (
-            <li key={pub.id} className="rounded-2xl bg-white p-2 ring-1 ring-zinc-200/60 dark:bg-zinc-950 dark:ring-zinc-800/60">
-              <MorphingDialog>
-                <MorphingDialogTrigger>
-                  <div className="flex flex-col items-stretch gap-3 p-2">
-                    <div className="flex min-w-0 flex-col gap-1">
-                      <h4 className="text-base font-medium text-zinc-900 dark:text-zinc-100 sm:text-lg">{pub.title}</h4>
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                        {pub.authors.map((author, idx) => (
-                          <span key={`${pub.id}-author-${idx}`}>
-                            <span className={author === 'Jaywoong Jeong' ? 'font-semibold text-zinc-900 dark:text-zinc-100' : undefined}>
-                              {author}
-                            </span>
-                            {idx < pub.authors.length - 1 ? ', ' : ''}
+                  <p className="mt-1.5 text-sm text-zinc-600 dark:text-zinc-400">
+                    {experience.mentors && experience.mentors.length > 0 && (
+                      <>
+                        Mentor{experience.mentors.length > 1 ? 's' : ''}:{' '}
+                        {experience.mentors.map((mentor, index) => (
+                          <span key={`${experience.id}-${mentor.name}`}>
+                            {mentor.link ? (
+                              <a
+                                href={mentor.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={textLink}
+                              >
+                                {mentor.name}
+                              </a>
+                            ) : (
+                              mentor.name
+                            )}
+                            {index < experience.mentors!.length - 1 ? ', ' : ''}
                           </span>
                         ))}
-                      </div>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{renderStatus(pub)}</p>
-                      
-                    </div>
-                  </div>
-                </MorphingDialogTrigger>
-                <MorphingDialogContainer>
-                  <MorphingDialogContent className="w-[min(92vw,800px)] overflow-hidden rounded-2xl bg-white p-0 dark:bg-zinc-950">
-                    <div className="relative p-6">
-                      <MorphingDialogTitle className="text-xl font-medium text-zinc-900 dark:text-zinc-100">{pub.title}</MorphingDialogTitle>
-                      <MorphingDialogSubtitle className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                        {(pub.authors || []).join(', ')} • {renderStatus(pub)}
-                      </MorphingDialogSubtitle>
-                      {pub.image && (
-                        <div className="relative mt-4 h-64 w-full overflow-hidden rounded-xl ring-1 ring-zinc-200/60 dark:ring-zinc-800/60">
-                          <Image src={pub.image} alt={pub.imageAlt || pub.title} fill className="object-contain" />
-                        </div>
-                      )}
-                      {pub.description && (
-                        <MorphingDialogDescription className="mt-4 text-sm text-zinc-700 dark:text-zinc-300">
-                          {pub.description}
-                        </MorphingDialogDescription>
-                      )}
-                      {pub.tags && pub.tags.length > 0 && (
-                        <div className="mt-4 flex flex-wrap items-center gap-2">
-                          {pub.tags.map((tag) => (
-                            <span key={tag} className="rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{tag}</span>
-                          ))}
-                        </div>
-                      )}
-                      {pub.link && (
-                        <a
-                          href={pub.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-block text-sm text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-zinc-100"
-                        >
-                          Read the paper
-                        </a>
-                      )}
-                      <MorphingDialogClose className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100" />
-                    </div>
-                  </MorphingDialogContent>
-                </MorphingDialogContainer>
-              </MorphingDialog>
-            </li>
+                        <span className="mx-1.5 text-zinc-300 dark:text-zinc-700">
+                          |
+                        </span>
+                      </>
+                    )}
+                    Advisor:{' '}
+                    {experience.advisor.link ? (
+                      <a
+                        href={experience.advisor.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={textLink}
+                      >
+                        Prof. {experience.advisor.name}
+                      </a>
+                    ) : (
+                      <>Prof. {experience.advisor.name}</>
+                    )}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {experience.summary}
+                  </p>
+                </div>
+              </div>
+            </motion.li>
           ))}
-        </ul>
-      </motion.section>
-      
+        </ol>
+      </Section>
 
-      {false && (
-        <motion.section
-          id="contact"
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-        >
-          <h3 className="mb-5 text-lg font-medium">Connect</h3>
-          <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-            Feel free to contact me at{' '}
-            <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
-              {EMAIL}
-            </a>
-          </p>
-          <div className="flex items-center justify-start space-x-3 lg:hidden">
-            {SOCIAL_LINKS.map((link) => (
-              <MagneticSocialLink key={link.label} link={link.link}>
-                {link.label}
-              </MagneticSocialLink>
-            ))}
-          </div>
-        </motion.section>
-      )}
+      <Section id="research-collaborations" title="Research Collaborations">
+        <div className="space-y-2">
+          {RESEARCH_COLLABORATIONS.map((collaboration) => (
+            <motion.article
+              key={collaboration.id}
+              variants={VARIANTS_SECTION}
+              transition={TRANSITION_SECTION}
+              whileHover={{ y: -2 }}
+              className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200/60 transition-shadow hover:shadow-md dark:bg-zinc-950 dark:ring-zinc-800/70"
+            >
+              <Spotlight
+                size={180}
+                className="from-zinc-100 via-zinc-100/70 to-transparent dark:from-zinc-800 dark:via-zinc-900 dark:to-transparent"
+              />
+              <div className="relative z-10 flex items-start gap-4">
+                <InstitutionLogos logos={collaboration.logos} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <h3 className="leading-snug font-medium text-zinc-900 dark:text-zinc-100">
+                      {collaboration.title}
+                    </h3>
+                    {collaboration.period && (
+                      <span className="shrink-0 text-sm text-zinc-400 tabular-nums">
+                        {collaboration.period}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                    {collaboration.affiliation} · With{' '}
+                    {collaboration.collaborators.join(', ')}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {collaboration.summary}
+                  </p>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </Section>
+
+      <SelectedProjects />
+
+      <Section id="contact" title="Connect">
+        <p className="text-zinc-600 dark:text-zinc-400">
+          Feel free to{' '}
+          <ObfuscatedEmailLink className={textLink} label="email me" /> or find
+          a time on{' '}
+          <a
+            href="#"
+            aria-disabled="true"
+            title="Scheduling link coming soon"
+            onClick={(event) => event.preventDefault()}
+            className={`${textLink} cursor-not-allowed`}
+          >
+            Calendly
+          </a>
+          .
+        </p>
+      </Section>
     </motion.main>
   )
 }

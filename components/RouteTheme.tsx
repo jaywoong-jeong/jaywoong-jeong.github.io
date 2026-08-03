@@ -1,23 +1,27 @@
 'use client'
 import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useTheme } from 'next-themes'
 
 export default function RouteTheme() {
   const pathname = usePathname()
-  const { setTheme, resolvedTheme } = useTheme()
+  const { setTheme } = useTheme()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const isArtist = pathname?.startsWith('/artist')
     const desired = isArtist ? 'dark' : 'light'
-    if (resolvedTheme !== desired) {
-      setTheme(desired)
-      // keep SSR in sync on subsequent navigations
-      document.cookie = `theme=${desired}; path=/; max-age=31536000`
-    }
-  }, [pathname, resolvedTheme, setTheme])
+
+    // Route changes happen client-side, so update the document before the
+    // browser paints the next page. Waiting for a normal effect causes a
+    // visible white-to-black flash when entering the artist section.
+    const root = document.documentElement
+    root.classList.remove('light', 'dark')
+    root.classList.add(desired)
+    root.style.colorScheme = desired
+
+    setTheme(desired)
+    document.cookie = `theme=${desired}; path=/; max-age=31536000`
+  }, [pathname, setTheme])
 
   return null
 }
-
-

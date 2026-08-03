@@ -25,8 +25,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
 
   return (
     <main className="prose prose-gray mt-24 pb-20 dark:prose-invert">
-      <Link href="/" className="no-underline">
-        ← Back
+      <Link href="/projects" className="no-underline">
+        ← Back to projects
       </Link>
       <h1>{project.name}</h1>
       {!MDXContent ? <p>{project.description}</p> : null}
@@ -84,5 +84,3 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ id: p.id }))
 }
-
-

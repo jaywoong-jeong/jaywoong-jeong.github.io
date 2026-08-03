@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
-import { Header } from './header'
+import { ClientLayout } from '@/components/ClientLayout'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { cookies, headers } from 'next/headers'
@@ -122,19 +122,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <RouteTheme />
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-6xl flex-1 px-4 pt-12 lg:pt-20">
-              <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
-                <aside className="self-start lg:sticky lg:top-20">
-                  <Header />
-                </aside>
-                <div>
-                  {children}
-                  <Footer />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ClientLayout footer={<Footer />}>{children}</ClientLayout>
         </ThemeProvider>
         <script
           type="application/ld+json"
