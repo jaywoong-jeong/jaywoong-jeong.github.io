@@ -696,8 +696,8 @@ export const PUBLICATIONS: Publication[] = [
     title:
       'TIDES: A Longitudinal Bilingual Dataset for Modeling Multi-Party Social Dynamics',
     authors: [
-      'Heechan Lee',
-      'Jeonggyu Kang',
+      'Heechan Lee*',
+      'Jeonggyu Kang*',
       'Junho Myung',
       'Jaywoong Jeong',
       'Juho Kim',
