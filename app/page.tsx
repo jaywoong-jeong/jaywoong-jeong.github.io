@@ -343,8 +343,8 @@ export default function Personal() {
             at{' '}
             <a href={LINKS.lids} className={textLink}>
               MIT LIDS
-            </a>
-            , with{' '}
+            </a>{' '}
+            and with{' '}
             <a href={LINKS.takyeon} className={textLink}>
               Tak Yeon Lee
             </a>{' '}
@@ -352,15 +352,15 @@ export default function Personal() {
             <a href={LINKS.ael} className={textLink}>
               AI Experience Lab
             </a>
-            . Across these collaborations, I combine computational methods,
-            system building, and human-centered evaluation to study how
-            intelligent systems behave within real social and organizational
-            contexts. Outside of research, I secretly pursue theater and
+            . Across these projects, I combine computational methods, system
+            development, and human-centered evaluation to study how intelligent
+            systems behave in real-world social and organizational contexts.
+            Outside of research, I secretly pursue theater and
             stand-up comedy.{' '}
             <Link href="/artist" className={textLink}>
               Check out my creative page
             </Link>{' '}
-            to see this side of me.
+            to see more of my creative work.
           </p>
           <p>
             I also keep a{' '}
