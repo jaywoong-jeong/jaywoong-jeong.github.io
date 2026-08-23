@@ -306,7 +306,7 @@ export default function Personal() {
             <a href={LINKS.kaist} className={textLink}>
               KAIST
             </a>{' '}
-            studying{' '}
+            affiliated with{' '}
             <a
               href="https://sts.kaist.ac.kr/en/"
               target="_blank"
@@ -329,7 +329,7 @@ export default function Personal() {
                 </span>
               </span>
             </a>{' '}
-            and Mathematical Sciences, with a minor in Design. My work sits at
+            and the Math Department, with a minor in Design. My work sits at
             the intersection of social AI, multi-agent systems, and
             human-computer interaction. I am especially interested in how AI
             systems can understand people and groups—and how they can augment
