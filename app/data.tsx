@@ -654,10 +654,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
     link: 'https://www.linkedin.com/in/jaywoong-jeong/',
   },
   {
-    label: 'Digital Garden',
-    link: 'https://knowledge.jaywoong.me',
-  },
-  {
     label: 'Instagram',
     link: 'https://www.instagram.com/jaywoong.jeong',
   },

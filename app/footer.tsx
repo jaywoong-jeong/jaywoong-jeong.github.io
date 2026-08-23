@@ -10,21 +10,14 @@ function getLastUpdated(): string {
       day: 'numeric',
     })
 
-  // 1) Prefer deployment-provided commit timestamp (e.g., Vercel)
-  const vercelTs = process.env.VERCEL_GIT_COMMIT_TIMESTAMP
-  if (vercelTs) {
-    const d = new Date(vercelTs)
-    if (!Number.isNaN(d.getTime())) return format(d)
-  }
-
-  // 2) Optional custom build timestamp if provided
+  // Prefer the commit timestamp supplied by the Pages build workflow.
   const buildTs = process.env.NEXT_PUBLIC_BUILD_TIMESTAMP
   if (buildTs) {
     const d = new Date(buildTs)
     if (!Number.isNaN(d.getTime())) return format(d)
   }
 
-  // 3) In development, approximate using latest mtime of key source dirs
+  // In development, approximate using latest mtime of key source dirs.
   if (process.env.NODE_ENV === 'development') {
     const roots = ['app', 'components', 'lib']
     const latestMTimeInDir = (dir: string): number => {
@@ -52,7 +45,7 @@ function getLastUpdated(): string {
     } catch {}
   }
 
-  // 4) Fallback to build time (runtime now)
+  // Fallback to build time.
   return format(new Date())
 }
 

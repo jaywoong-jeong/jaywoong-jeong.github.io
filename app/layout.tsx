@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Analytics } from '@vercel/analytics/next'
 import { ClientLayout } from '@/components/ClientLayout'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
-import { cookies, headers } from 'next/headers'
 import RouteTheme from '@/components/RouteTheme'
+import { WEBSITE_URL } from '@/lib/constants'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -15,7 +14,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jaywoong.me/'),
+  metadataBase: new URL(`${WEBSITE_URL}/`),
   alternates: {
     canonical: '/',
   },
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Jaywoong Jeong',
     description: 'KAIST(한국과학기술원) HCI/디자인/AI 포트폴리오',
-    url: 'https://jaywoong.me/',
+    url: `${WEBSITE_URL}/`,
     siteName: 'Jaywoong Jeong',
     locale: 'ko_KR',
     type: 'website',
@@ -64,23 +63,17 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const hdrs = await headers()
-  const headerTheme = hdrs.get('x-theme')
-  const cookieStore = await cookies()
-  const themeCookie = cookieStore.get('theme')?.value
-  const currentTheme = headerTheme || themeCookie || 'light'
-  const isDark = currentTheme === 'dark'
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Jaywoong Jeong (정재웅)',
     alternateName: ['정재웅', 'Jaywoong Jeong'],
-    url: 'https://jaywoong.me/',
+    url: `${WEBSITE_URL}/`,
     alumniOf: ['KAIST', '한국과학기술원', '민족사관고등학교'],
     knowsAbout: ['HCI', 'Human-Computer Interaction', 'Design', 'AI'],
     sameAs: [
@@ -89,34 +82,30 @@ export default async function RootLayout({
       'https://www.instagram.com/jaywoong.jeong',
     ],
   }
-  const initialClass = isDark ? 'dark' : 'light'
-  const initialTheme = isDark ? 'dark' : 'light'
   return (
-    <html lang="ko" suppressHydrationWarning className={initialClass}>
+    <html lang="ko" suppressHydrationWarning className="light">
       <body
         suppressHydrationWarning
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
-        {/* No-flash: lock theme before hydration and sync storage */}
+        {/* Set the route-specific theme before hydration to avoid a flash. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(){
-                var t='${initialTheme}';
+                var t=location.pathname.indexOf('/artist')===0?'dark':'light';
                 var d=document.documentElement;
-                if(!d.classList.contains(t)){
-                  d.classList.remove('light','dark');
-                  d.classList.add(t);
-                }
+                d.classList.remove('light','dark');
+                d.classList.add(t);
+                d.style.colorScheme=t;
                 try{ localStorage.setItem('theme', t); }catch(e){}
-                document.cookie = 'theme='+t+'; path=/; max-age=31536000';
               })();
             `,
           }}
         />
         <ThemeProvider
           attribute="class"
-          defaultTheme={isDark ? 'dark' : 'light'}
+          defaultTheme="light"
           storageKey="theme"
           enableSystem={false}
           disableTransitionOnChange
@@ -128,7 +117,6 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Analytics />
       </body>
     </html>
   )

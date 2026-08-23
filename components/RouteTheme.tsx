@@ -20,7 +20,6 @@ export default function RouteTheme() {
     root.style.colorScheme = desired
 
     setTheme(desired)
-    document.cookie = `theme=${desired}; path=/; max-age=31536000`
   }, [pathname, setTheme])
 
   return null
